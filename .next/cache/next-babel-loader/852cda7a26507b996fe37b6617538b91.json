@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Home from '../modules/home.module';\nexport default Home;","map":{"version":3,"sources":["C:/Users/usuario/Desktop/marketblets/front-end/pages/index.js"],"names":["Home"],"mappings":"AAAA,OAAOA,IAAP,MAAiB,wBAAjB;AAEA,eAAeA,IAAf","sourcesContent":["import Home from '../modules/home.module';\n\nexport default Home;"]},"metadata":{},"sourceType":"module"}

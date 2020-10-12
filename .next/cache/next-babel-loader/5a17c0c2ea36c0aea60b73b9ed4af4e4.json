@@ -1,0 +1,1 @@
+{"ast":null,"code":"import About from '../modules/about.module';\nexport default About;","map":null,"metadata":{},"sourceType":"module"}

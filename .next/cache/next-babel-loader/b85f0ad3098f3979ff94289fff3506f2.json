@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport MyBusinessComp from '../modules/mybusiness.module';\n\nvar MyBusiness = function MyBusiness() {\n  return __jsx(MyBusinessComp, null);\n};\n\nexport default MyBusiness;","map":null,"metadata":{},"sourceType":"module"}

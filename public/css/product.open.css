@@ -1,0 +1,21 @@
+.btn-buy-now{
+    background-color: rgb(255, 0, 123);
+    font-weight: 600;
+}
+.content-img-prod-open{
+    position: relative;
+    height: 50vh;
+}
+.content-img-prod-open img{
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    top: 0;
+}
+.component-info-buy{
+    padding-bottom: 1.5%;
+}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport RegisterModule from '../modules/register.module';\n\nconst Register = () => __jsx(RegisterModule, null);\n\nexport default Register;","map":null,"metadata":{},"sourceType":"module"}
