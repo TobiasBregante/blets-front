@@ -1,5 +1,5 @@
 module.exports = {
     env: {
-        API_PATH: 'https://blets.herokuapp.com'
+        API_PATH: 'https://apiblets.herokuapp.com'
     }
 }
