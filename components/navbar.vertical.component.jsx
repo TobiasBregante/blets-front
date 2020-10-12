@@ -18,7 +18,7 @@ const NavbarVertical = () => {
     }
     return(
         <>
-        <article className={`row bg-dark ${stateNav}`}>
+        <article className={`row ${stateNav}`}>
             <article className="col-12 col-sm-12 col-lg-12 col-xl-12">
                 <button onClick={handleSwitchNavbar} className="btn-open-nav-vertical" type="button">
                     <svg className={`${btnIcoOpen} bi bi-chevron-compact-right`} width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

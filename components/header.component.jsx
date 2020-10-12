@@ -62,7 +62,7 @@ const Header = () => {
     return(
         <>
         <header className="row">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-12 col-sm-12 col-lg-12 col-xl-12">
+            <nav className="navbar navbar-expand-lg navbar-dark col-12 col-sm-12 col-lg-12 col-xl-12">
                 <Link href="/">
                     <a className="navbar-brand"><img className="brand" src="../../img/brand.png" alt="MarketBlets"/></a>
                 </Link>

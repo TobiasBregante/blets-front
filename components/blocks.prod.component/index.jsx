@@ -24,7 +24,7 @@ const BlockProduct = prop => {
     return(
         <>
         <article className="title-block-prod-home col-12 col-sm-12 col-lg-12 col-xl-12">
-            <h1 className="bg-dark">{prop.section}</h1>
+            <h1>{prop.section}</h1>
         </article>
         {
             product.length > 0 ? product.map((prod, i) => (

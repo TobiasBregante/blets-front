@@ -23,6 +23,7 @@ header{
     padding-right: 6%;
 }
 .title-block-prod-home h1{
+    background-color: rgb(173, 20, 87);
     position: relative !important;
     width: 300px auto;
     font-size: 25px;
@@ -59,6 +60,7 @@ header{
     z-index: 999;
 }
 .navbar-vertical{
+    background-color: rgb(173, 20, 87);
     border-bottom-right-radius: 10px;
     position: absolute;
     min-height: 100vh;
@@ -70,10 +72,14 @@ header{
     top: 0;
     left: 0;
 }
+.navbar{
+    background-color: rgb(173, 20, 87);
+}
 .navbar-vertical-close ul{
     display: none;
 }
 .navbar-vertical-close{
+    background-color: rgba(173, 20, 87, .5);
     border-bottom-right-radius: 10px;
     position: absolute;
     min-height: 100vh;
