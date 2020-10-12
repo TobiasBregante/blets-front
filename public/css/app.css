@@ -549,6 +549,14 @@ footer a, footer a:hover{
 .card-product-all{
     height: 200px !important;
 }
+@media(max-width: 650px){
+    .card-product-all .card-title, .card-product-all .card-price{
+        font-size: 12px !important;
+    }
+    .card-product-all .card-description{
+        font-size: 11px !important;
+    }
+}
 .not-products-title{
     text-align: center;
 }

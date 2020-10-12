@@ -12,7 +12,7 @@ const QueryProduct = () => {
             <main className="container-fluid">
                 <Header/>
                 <section className="row section-home">
-                    <article className="col-6">
+                    <article className="col-10 col-sm-10 col-lg-8 col-xl-6">
                         <ProductAllQuery/>
                     </article>
                 </section>
