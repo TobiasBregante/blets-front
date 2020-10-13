@@ -28,6 +28,11 @@ const Home = () => {
                     </article>
                 </article>
                 <section className="row section-home">
+                    <article className='presentation-influencer-home col-12 col-sm-12 col-lg-12 col-xl-12'>
+                        <article className='col-12 presentation-1-home'>
+                            <img src="../img/influencer-2.svg" alt="Influencer"/>
+                        </article>
+                    </article>
                     <BlockProduct section="Ofertas semanales" api='all'/>
                     <BlockProduct section="Entrenamiento" api='deportes-y-fitness'/>
                     <BlockProduct section="Electrodomésticos" api='electrodomesticos'/>

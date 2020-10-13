@@ -156,6 +156,13 @@ const NavbarVertical = () => {
                             </a>
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link href="/categorias/[categoria]" as="/categorias/empleos">
+                            <a className="nav-link">
+                                Empleos
+                            </a>
+                        </Link>
+                    </li>
                 </ul>
             </article>
         </article>

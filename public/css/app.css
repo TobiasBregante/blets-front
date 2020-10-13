@@ -657,3 +657,11 @@ footer a, footer a:hover{
     padding: 7.5%;
     font-size: 20px;
 }
+.presentation-influencer-home{
+    padding-right: 6%;
+    padding-left: 6%;
+    margin: 1% auto;
+}
+.presentation-1-home{
+    padding: 0 !important;
+}

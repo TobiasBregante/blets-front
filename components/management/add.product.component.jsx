@@ -154,6 +154,7 @@ const AddProduct = props => {
                         <option value="musica">Música</option>
                         <option value="viajes">Viajes</option>
                         <option value="zapatos">Zapatos</option>
+                        <option value="empleos">Empleos</option>
                     </select>
                     <small className='p-2 m-0'>Precio <span className='text-danger'>*</span></small>
                     <input required onChange={handleInputAmount} className='d-block' type="text" placeholder='Precio' value={amount}/>
