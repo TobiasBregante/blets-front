@@ -21,7 +21,7 @@ const MyBusinessComp = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return(
         <>
-        <article className="col-12 col-sm-12 col-lg-12 col-xl-12 bg-dark text-light mb-2 p-4">
+        <article className="col-12 col-sm-12 col-lg-12 col-xl-12 content-title-my-business text-light mb-2 p-4">
             <img src="img/party.png" alt="welcome" className='party-title-gestion'/><h2 className='d-inline p-4 title-gestion'>Bienvenido al Centro de Gestión, {cookies.user ? cookies.user.user : ''}</h2><span></span>
             <span className='text-light bg-dark p-2 time-gestion'>{valueDate.toLocaleDateString("es-AR", options)}</span>
         </article>

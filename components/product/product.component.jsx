@@ -7,10 +7,11 @@ import RemoveProduct from '../management/remove.product.component';
 import EditProduct from '../management/edit.product.component';
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import { useRef } from 'react';
+import Link from 'next/link';
 
 const Product = prop => {
     const Router = useRouter();
-    const { id } = Router.query;
+    const { id, name } = Router.query;
     const imgContent = useRef(null)
     const [credential, setCredential] = useState('');
     const [imgContentState, setImgContentState] = useState('')
@@ -95,6 +96,14 @@ const Product = prop => {
     return(
         <>
         <section className="row section-product">
+            <article className='col-12 col-sm-12 col-lg-12 col-xl-12 p-0 m-0'>
+                <nav ariaLabel="breadcrumb">
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><Link href="/" as='/'><a>Inicio</a></Link></li>
+                        <li className="breadcrumb-item active" ariaCurrent="page">{name}</li>
+                    </ol>
+                </nav>
+            </article>
             <article className="col-12 col-sm-12 col-lg-8 col-xl-8">
                 <article ref={imgContent} className="col-12 content-img-prod-open">
                     {credential === 'true' ? <RemoveProduct product={product}/> : false}
@@ -109,13 +118,13 @@ const Product = prop => {
                     <h2>Descripción</h2><hr/>
                     <ul type='none'>
                         <li>
-                            - Categoría: <span className='text-dark'><strong>{product.type}</strong></span><br/>
+                            - Categoría: <span className='text-light'><strong>{product.type}</strong></span><br/>
                         </li>
                         <li>
-                            - Nombre del negocio: <span className='text-dark'><strong>{product.business}</strong></span>
+                            - Nombre del negocio: <span className='text-light'><strong>{product.business}</strong></span>
                         </li>
                         <li>
-                        - Ubicación: <span className='text-dark'><strong>{product.location}</strong></span>
+                        - Ubicación: <span className='text-light'><strong>{product.location}</strong></span>
                         </li>
                     </ul><hr/>
                     <p>
@@ -134,7 +143,7 @@ const Product = prop => {
                             prefix={'$'}/>
                         : <span className='text-success'>GRATIS</span>}
                     </h4>
-                    <h4 className={`text-primary component-info-buy ${influencerTokenNoExist}`}>
+                    <h4 className={`text-light component-info-buy ${influencerTokenNoExist}`}>
                         {(product.amount !== 0) 
                         ? <CurrencyFormat value={product.amount} displayType={'text'} thousandSeparator={true} prefix={'$'}/>
                         : <span className='text-success'>GRATIS</span>}
@@ -158,13 +167,13 @@ const Product = prop => {
                 </article>
                 <article className="col-12">
                     <p className="component-info-buy">Pagá al contado o en cuotas con 
-                    <span className="text-primary"> <strong>Mercado Pago</strong></span></p>
+                    <span className="text-info"> <strong>Mercado Pago</strong></span></p>
                     <p>
                         <span className='bg-primary p-2 text-light'>
                             Se encuentra en <strong>{product.location}</strong>
                         </span>
                     </p>
-                    <article className='col-12 p-1 content-method-buy-steps mb-2 text-dark'>
+                    <article className='col-12 p-1 content-method-buy-steps mb-2 text-light'>
                         <ol type='1'>
                             <li className='p-1'>Hacé click en <small>"Compralo en un instante!"</small></li>
                             <li className='p-1'>Hacé el pago con Mercado Pago</li>
@@ -179,6 +188,16 @@ const Product = prop => {
                                 <a href={product.payment} onClick={handlerTransaction} target='_blank' className={`btn btn-primary text-light d-block ${acceptPaymentSwitch}`}>
                                     Pagar con Mercado Pago!
                                 </a>
+                                <p className='mt-4 content-cbu'>
+                                    CBU: <span className='text-warning'>
+                                    0720006988000038698918
+                                    </span>
+                                    <hr/>
+                                    <img className='ico-payments' src="../img/visa.png" alt="Visa"/>
+                                    <img className='ico-payments' src="../img/mastercard.png" alt="Mastercard"/>
+                                    <img className='ico-payments' src="../img/transfer.png" alt="Transferencia"/>
+                                    <img className='ico-payments' src="../img/mp.webp" alt="Mercado Pago"/>
+                                </p>
                                 <p className={`mt-4 ${switchNextStepPayment}`}>Estás a un paso de finalizar tu compra!<br/>
                                 Envía una foto del comprobante <a href='#' className='btn btn-success'>Envíalo por WhatsApp!</a></p>
                             </article>       
@@ -191,5 +210,5 @@ const Product = prop => {
         </>
     )
 }
-
+// 0720006988000038698918
 export default Product;

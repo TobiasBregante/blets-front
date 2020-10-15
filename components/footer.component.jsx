@@ -30,7 +30,7 @@ const Footer = () => {
             <article className="col-12 col-sm-12 col-lg-12 col-xl-12">
                 <ul>
                     <li>&copy;Copyright reserved MarketBlets.com 2020</li>
-                    <li>Powered by <a href="https://nezzed.com" target='_blank'>nezzed.com</a></li>
+                    <li>Powered by <a href="https://nezzed.com" target='_blank' className='text-info'>nezzed.com</a></li>
                 </ul>
             </article>
         </footer>

@@ -114,7 +114,7 @@ const Header = () => {
                         </li>
                         <li className="nav-item">
                             <Link href='/#' as='/#'>
-                                <a className={`nav-link ${(!viewBtnLoginRegister) ? 'd-none' : ''}`} onClick={handlerLogout}>
+                                <a className={`content-btn-register-now nav-link ${(!viewBtnLoginRegister) ? 'd-none' : ''}`} onClick={handlerLogout}>
                                     Cerrar sesión
                                 </a>
                             </Link>
@@ -122,10 +122,10 @@ const Header = () => {
                     </ul>
                     <article className="form-inline my-2 my-lg-0">
                         <Link href="/registrarme" as="/registrarme">
-                            <a className="nav-link"><span className={`btn btn-register-now btn-search ${viewBtnLoginRegister}`}>Regístrate ahora!</span></a>
+                            <a className="content-btn-register-now nav-link"><span className={`btn btn-register-now btn-search ${viewBtnLoginRegister}`}>Regístrate ahora!</span></a>
                         </Link>
                         <Link href="/iniciar-sesion" as="/iniciar-sesion">
-                            <a className="nav-link"><span className={`btn btn-login-now btn-secondary ${viewBtnLoginRegister}`}>Ingresar</span></a>
+                            <a className="content-btn-register-now nav-link"><span className={`btn btn-login-now btn-secondary ${viewBtnLoginRegister}`}>Ingresar</span></a>
                         </Link>
                         <form onSubmit={handlerSendSearch}>
                             <input onChange={handlerInputSearch} className="form-control mr-sm-2" type="search" placeholder="Buscalo acá" aria-label="Search" value={inputSearch}/>

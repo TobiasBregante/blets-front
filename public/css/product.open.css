@@ -19,3 +19,7 @@
 .component-info-buy{
     padding-bottom: 1.5%;
 }
+.content-cbu{
+    word-wrap: break-word;
+    font-size: 15px !important;
+}

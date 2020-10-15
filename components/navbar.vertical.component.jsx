@@ -159,7 +159,7 @@ const NavbarVertical = () => {
                     <li className="nav-item">
                         <Link href="/categorias/[categoria]" as="/categorias/empleos">
                             <a className="nav-link">
-                                Empleos
+                                Empleos <span className='badge badge-danger badge-pill'>Nuevas ofertas</span>
                             </a>
                         </Link>
                     </li>
