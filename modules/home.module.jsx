@@ -12,7 +12,7 @@ const Home = () => {
                 <Header/>
                 <article className='row'>
                     <article className='col-12 col-sm-12 col-lg-12 col-xl-12 banner-influencer-home'>
-                        <article className='col-9 p-5 m-auto info-influencer-home'>
+                        <article className='col-12 p-5 m-auto info-influencer-home'>
                             <p>
                                 ¿ QUÉ ES EL <span className='text-warning'>MARKETING</span> DE 
                                 <span className='text-warning'> INFLUENCERS</span> ?
@@ -41,36 +41,36 @@ const Home = () => {
                             </h2>
                             <p><br/>
                                 BENEFICIOS<br/><br/>
-                                <ul>
-                                    <li>
-                                        Ser modelo de nuestra próxima marca de ropa.
-                                    </li>
-                                    <li>
-                                        10% de ganancia en venta de cualquier producto que
-                                        se haga de tu parte.
-
-                                    </li>
-                                    <li>
-                                        30% de descuento en cualquier producto/servicio que
-                                        quieras.
-                                    </li>
-                                    <li>
-                                        Manejo de imagen por BLETS.
-                                    </li>
-                                    <li>
-                                        Canjes de todo tipo, sorteos en el equipo por viajes,
-                                        estadías y demás.
-                                    </li>
-                                    <li>
-                                        Aumento de seguidores e interacciones en todas tus
-                                        redes sociales.
-                                    </li>
-                                    <li>
-                                        Menciones con diferentes influencers del equipo de
-                                        BLETS.
-                                    </li>
-                                </ul>
                             </p>
+                            <ul>
+                                <li>
+                                    Ser modelo de nuestra próxima marca de ropa.
+                                </li>
+                                <li>
+                                    10% de ganancia en venta de cualquier producto que
+                                    se haga de tu parte.
+
+                                </li>
+                                <li>
+                                    30% de descuento en cualquier producto/servicio que
+                                    quieras.
+                                </li>
+                                <li>
+                                    Manejo de imagen por BLETS.
+                                </li>
+                                <li>
+                                    Canjes de todo tipo, sorteos en el equipo por viajes,
+                                    estadías y demás.
+                                </li>
+                                <li>
+                                    Aumento de seguidores e interacciones en todas tus
+                                    redes sociales.
+                                </li>
+                                <li>
+                                    Menciones con diferentes influencers del equipo de
+                                    BLETS.
+                                </li>
+                            </ul>
                             <a href="#" className='btn btn-apply-influencer col-12 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
                         </article>
                     </article>

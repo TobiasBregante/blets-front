@@ -14,6 +14,8 @@ const Header = () => {
     const [userLogged, setUserLogged] = useState('d-none');
     const [userLoggedSellers, setUserLoggedSellers] = useState('d-none');
     const [userLoggedInfluencer, setUserLoggedInfluencer] = useState('d-none');
+    const [stateNav, setStateNav] = useState('navbar-vertical-close');
+    const [navbarContent, setNavbarContent] = useState('navbar-content-close');
 
     const Logout = () => {
         removeCookie('user');
@@ -59,15 +61,28 @@ const Header = () => {
         inputSearch && inputSearch !== '' 
         ? Router.push(`/buscar/${inputSearch}`) : false;
     }
+
+    const handleSwitchNavbar = () => {
+        if(stateNav === 'navbar-vertical-close'){
+            setStateNav('navbar-vertical');
+            setNavbarContent('navbar-content');
+        }else{
+            setStateNav('navbar-vertical-close');
+            setNavbarContent('navbar-vertical-close');
+        }
+    }
     return(
         <>
         <header className="row">
             <nav className="navbar navbar-expand-lg navbar-dark col-12 col-sm-12 col-lg-12 col-xl-12">
+                <button onClick={handleSwitchNavbar} className='btn mt-2' type='button'>
+                    <i className='large material-icons text-light'>dehaze</i>
+                </button>
                 <Link href="/">
                     <a className="navbar-brand"><img className="brand" src="../../img/brand.png" alt="MarketBlets"/></a>
                 </Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon" />
+                    <i className='large material-icons text-light'>apps</i>
                 </button>
                 <article className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
@@ -135,7 +150,23 @@ const Header = () => {
                 </article>
             </nav>
         </header>
-        <NavbarVertical/>
+        <article className={`row ${stateNav}`}>
+            <article className={`pl-4 ${navbarContent}`}>
+                <ul>
+                    <li>
+                        <button onClick={handleSwitchNavbar} className='btn' type='button'>
+                            <i className='large material-icons text-light'>dehaze</i>
+                        </button>
+                    </li>
+                    <li>
+                        <Link href="/">
+                            <a><img className="brand" src="../../img/brand.png" alt="MarketBlets"/></a>
+                        </Link>
+                    </li>
+                </ul>
+            </article>
+            <NavbarVertical/>
+        </article>
         </>
     )
 }

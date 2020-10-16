@@ -100,7 +100,7 @@ const Product = prop => {
                 <nav ariaLabel="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><Link href="/" as='/'><a>Inicio</a></Link></li>
-                        <li className="breadcrumb-item active" ariaCurrent="page">{name}</li>
+                        <li className="breadcrumb-item active text-light" ariaCurrent="page">{name}</li>
                     </ol>
                 </nav>
             </article>
@@ -110,7 +110,7 @@ const Product = prop => {
                     {credential === 'true' ? <EditProduct product={product}/> : false}
                     <CloudinaryContext cloudName="blets">
                         <Image cloudName="blets" publicId={product.img} alt={product.title}>
-                            <Transformation width={(imgContentState - 50)} crop='scale'/>
+                            <Transformation width={(imgContentState - 50)} crop='scale' quality='40'/>
                         </Image>
                     </CloudinaryContext>
                 </article>
@@ -192,7 +192,8 @@ const Product = prop => {
                                     CBU: <span className='text-warning'>
                                     0720006988000038698918
                                     </span>
-                                    <hr/>
+                                </p><hr/>
+                                <p>
                                     <img className='ico-payments' src="../img/visa.png" alt="Visa"/>
                                     <img className='ico-payments' src="../img/mastercard.png" alt="Mastercard"/>
                                     <img className='ico-payments' src="../img/transfer.png" alt="Transferencia"/>

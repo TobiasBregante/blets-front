@@ -31,7 +31,7 @@ const ProductAll = prop => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item"><Link href="/" as='/'><a>Inicio</a></Link></li>
-              <li className="breadcrumb-item active" aria-current="page">{categoria}</li>
+              <li className="breadcrumb-item active text-light" aria-current="page">{categoria}</li>
             </ol>
           </nav>
         {
@@ -43,7 +43,9 @@ const ProductAll = prop => {
                                 <CloudinaryContext 
                                     cloudName="blets" 
                                     >
-                                    <Image className='card-img' src={`https://res.cloudinary.com/blets/image/upload/${prod.img}`}/>
+                                    <Image className='card-img' src={`https://res.cloudinary.com/blets/image/upload/${prod.img}.jpg`}>
+                                        <Transformation quality="10"/>
+                                    </Image>
                                 </CloudinaryContext>
                             </article>
                             <article className="col-md-8">
