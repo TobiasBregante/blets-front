@@ -10,7 +10,7 @@ const Home = () => {
             <Head/>
             <main className="container-fluid">
                 <Header/>
-                <article className='row'>
+                <article className='row d-none'>
                     <article className='col-12 col-sm-12 col-lg-12 col-xl-12 banner-influencer-home'>
                         <article className='col-12 p-5 m-auto info-influencer-home'>
                             <p>
@@ -30,48 +30,85 @@ const Home = () => {
                     <article className='presentation-influencer-home col-12 col-sm-12 col-lg-12 col-xl-12'>
                         <article className='col-12 presentation-1-home'>
                             <img src="../img/influencer-2.svg" alt="Influencer"/>
-                            <a href="/" className='view-more-btn btn'>Más información</a>
+                            <a href="https://api.whatsapp.com/send?phone=5491156168994&text=Hola!%20Me%20interesa%el%plan%empresa!" 
+                                target='_blank' 
+                                className='view-more-btn btn'>Más información</a>
                         </article>
                     </article>
-                    <article className='content-convocatory-influencer col-12 col-sm-12 col-lg-12 col-xl-12'>
+                    <article className='content-convocatory-influencer col-12 col-sm-12 col-lg-6 col-xl-6'>
                         <article className="content-text">
                             <h2>
-                                ¿Quieres formar parte de MarketBlets promocionando productos 
-                                y servicios de miles de negocios adheridos a nuestra marcar?
+                                Plan <strong className='text-warning'>vendedores</strong>
                             </h2>
                             <p><br/>
-                                BENEFICIOS<br/><br/>
+                                Sé parte del equipo de ventas de <span className='text-warning'>BLETS</span>, promociona 
+                                la plataforma 
+                                y obtén las comisiones más competitivas del mercado.
                             </p>
-                            <ul>
-                                <li>
-                                    Ser modelo de nuestra próxima marca de ropa.
-                                </li>
-                                <li>
-                                    10% de ganancia en venta de cualquier producto que
-                                    se haga de tu parte.
-
-                                </li>
-                                <li>
-                                    30% de descuento en cualquier producto/servicio que
-                                    quieras.
-                                </li>
-                                <li>
-                                    Manejo de imagen por BLETS.
-                                </li>
-                                <li>
-                                    Canjes de todo tipo, sorteos en el equipo por viajes,
-                                    estadías y demás.
-                                </li>
-                                <li>
-                                    Aumento de seguidores e interacciones en todas tus
-                                    redes sociales.
-                                </li>
-                                <li>
-                                    Menciones con diferentes influencers del equipo de
-                                    BLETS.
-                                </li>
-                            </ul>
-                            <a href="#" className='btn btn-apply-influencer col-12 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
+                            <p>
+                                Nuestros vendedores cuentan con entrenamiento constante en la plataforma, 
+                                y beneficios como vendedor
+                            </p>
+                            <a href="https://api.whatsapp.com/send?phone=5491156168994&text=Hola!%20Me%20interesa%el%plan%influencer!" 
+                            target='_blank' className='btn btn-apply-influencer col-12 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
+                            <article className='col-12 icons-star-home'>
+                                <svg viewBox="0 0 16 16" 
+                                    className="bi bi-star-fill" 
+                                    fill="currentColor" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg viewBox="0 0 16 16" 
+                                    className="bi bi-star-fill" 
+                                    fill="currentColor" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg viewBox="0 0 16 16" 
+                                    className="bi bi-star-fill" 
+                                    fill="currentColor" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                            </article>
+                        </article>
+                    </article>
+                    <article className='content-convocatory-influencer col-12 col-sm-12 col-lg-6 col-xl-6'>
+                        <article className="content-text">
+                            <h2>
+                                Plan <strong className='text-warning'>empresas</strong>
+                            </h2>
+                            <p><br/>
+                                ¿Estás buscando empezar una campaña publicitaria para incrementar tus ventas? 
+                            </p>
+                            <p>
+                                En <span className='text-warning'>BLETS</span> contás con influencers de 
+                                diversas <span className='text-warning'>redes sociales</span> enfocados en 
+                                promocionar tus productos y/o servicios con un gran potencial de vistas por la audiencia de 
+                                diversas comunidades.
+                            </p>
+                            <a href="https://api.whatsapp.com/send?phone=5491156168994&text=Hola!%20Me%20interesa%el%plan%empresa!" 
+                                target='_blank' className='btn btn-apply-influencer col-12 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
+                            <article className='col-12 icons-star-home'>
+                                <svg viewBox="0 0 16 16" 
+                                    className="bi bi-star-fill" 
+                                    fill="currentColor" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg viewBox="0 0 16 16" 
+                                    className="bi bi-star-fill" 
+                                    fill="currentColor" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg viewBox="0 0 16 16" 
+                                    className="bi bi-star-fill" 
+                                    fill="currentColor" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                            </article>
                         </article>
                     </article>
                 </section>

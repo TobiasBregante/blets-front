@@ -7,10 +7,16 @@ import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react'
 import { useRef } from 'react';
 
 const ProductAll = prop => {
-    const imgContent = useRef(null)
+    const imgContain = useRef(null)
     const Router = useRouter();
     const { categoria } = Router.query;
     const [product, setProduct] = useState([]);
+    const [imgContentState, setImgContentState] = useState('');
+    useEffect(() => {
+        if(imgContain.current){
+            setImgContentState(imgContain.current.offsetWidth)
+        }
+    }, null)
     useEffect(() => {
         const getAllProduct = async () => {
             const fetchAll = await fetch(`${process.env.API_PATH}/v1/product/category/${categoria}`, {
@@ -24,8 +30,6 @@ const ProductAll = prop => {
         }
         getAllProduct()
     }, [prop])
-    
-    
     return(
         <>
           <nav aria-label="breadcrumb">
@@ -39,14 +43,16 @@ const ProductAll = prop => {
                 <Link key={i} href="/[name]/[id]" as={`/${prod.title}/${prod._id}`}>
                     <a className="card-product-all card mb-3 col-12 col-sm-12 col-lg-12 col-xl-12" style={{maxWidth: '540px'}}>
                         <article className="row no-gutters">
-                            <article className="col-md-4">
-                                <CloudinaryContext 
-                                    cloudName="blets" 
-                                    >
-                                    <Image className='card-img' src={`https://res.cloudinary.com/blets/image/upload/${prod.img}.jpg`}>
-                                        <Transformation quality="10"/>
-                                    </Image>
-                                </CloudinaryContext>
+                            <article ref={imgContain} className="col-md-4">
+                                {
+                                    prod.img 
+                                    ? <CloudinaryContext cloudName="blets">
+                                        <Image className='card-img' publicId={`${prod.img}.jpg`}>
+                                            <Transformation crop='scale' quality='60' width={(imgContentState - 50)} dpr='auto'/>
+                                        </Image>
+                                    </CloudinaryContext>
+                                    : ''
+                                }
                             </article>
                             <article className="col-md-8">
                                 <article className="card-body">

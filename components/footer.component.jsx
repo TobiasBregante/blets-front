@@ -14,7 +14,7 @@ const Footer = () => {
         <article className={`col-12 col-sm-12 col-lg-12 col-xl-12 alert-user-logged-footer bg-dark ${userLogged}`}>
             <p className='text-light'>
                 <Link href='/registrarme' as='/registrarme'>
-                <a className='text-info'>Reístrate</a></Link> o <Link href='/iniciar-sesion' as='/iniciar-sesion'>
+                <a className='text-info'>Regístrate</a></Link> o <Link href='/iniciar-sesion' as='/iniciar-sesion'>
                 <a className='text-info'>inicia sesión</a></Link> para aprovechar de las oportunidades al máximo en 
                 <strong> MarketBlets</strong>
                 <svg width="2em" height="2em" viewBox="0 0 16 16" className="ml-3 bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

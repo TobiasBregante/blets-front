@@ -12,9 +12,10 @@ import Link from 'next/link';
 const Product = prop => {
     const Router = useRouter();
     const { id, name } = Router.query;
-    const imgContent = useRef(null)
+    const imgContent = useRef(null);
     const [credential, setCredential] = useState('');
-    const [imgContentState, setImgContentState] = useState('')
+    const [imgCard, setImgCard] = useState('d-none')
+    const [imgContentState, setImgContentState] = useState('');
     const [cookies, setCookie] = useCookies(['user']);
     const [product, setProduct] = useState([]);
     const [influencerTokenExist, setInfluencerTokenExist] = useState('d-none');
@@ -47,6 +48,7 @@ const Product = prop => {
             }
             //kfuiqqbr-blets
         }
+        if(product.img)setImgContentState(imgContent.current.offsetWidth);
         handlerTokenExist()
     }, null)
     const handlerAcceptPaymentSwitch = e => {
@@ -90,17 +92,16 @@ const Product = prop => {
             const dataFetch = await fetchAll.json();
             setProduct(dataFetch);
         }
-        setImgContentState(imgContent.current.offsetWidth)
         getAllProduct()
     }, [id])
     return(
         <>
         <section className="row section-product">
             <article className='col-12 col-sm-12 col-lg-12 col-xl-12 p-0 m-0'>
-                <nav ariaLabel="breadcrumb">
+                <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><Link href="/" as='/'><a>Inicio</a></Link></li>
-                        <li className="breadcrumb-item active text-light" ariaCurrent="page">{name}</li>
+                        <li className="breadcrumb-item active text-light" aria-current="page">{name}</li>
                     </ol>
                 </nav>
             </article>
@@ -108,11 +109,15 @@ const Product = prop => {
                 <article ref={imgContent} className="col-12 content-img-prod-open">
                     {credential === 'true' ? <RemoveProduct product={product}/> : false}
                     {credential === 'true' ? <EditProduct product={product}/> : false}
-                    <CloudinaryContext cloudName="blets">
-                        <Image cloudName="blets" publicId={product.img} alt={product.title}>
-                            <Transformation width={(imgContentState - 50)} crop='scale' quality='40'/>
-                        </Image>
-                    </CloudinaryContext>
+                    {
+                        product.img 
+                        ? <CloudinaryContext cloudName="blets">
+                            <Image className='card-img' publicId={`${product.img}.jpg`}>
+                                <Transformation crop='scale' quality='40' width={(imgContentState - 50)} dpr='auto'/>
+                            </Image>
+                        </CloudinaryContext>
+                        : ''
+                    }
                 </article>
                 <article className="col-12">
                     <h2>Descripción</h2><hr/>

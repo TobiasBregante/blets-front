@@ -36,7 +36,7 @@ header{
     /*background-color: rgb(240, 243, 244);*/
     justify-content: center;
     min-height: 100vh;
-    padding: 5%;
+    padding: 0;
     color: #FFF;
 }
 .section-about{
@@ -794,9 +794,8 @@ footer a, footer a:hover{
     font-size: 20px;
 }
 .presentation-influencer-home{
-    padding-right: 6%;
-    padding-left: 6%;
-    margin: 1% auto;
+    padding: 0;
+    margin-bottom: 1% auto;
 }
 .presentation-influencer-home .btn{
     background-color: #e83e8c;
@@ -818,9 +817,7 @@ footer a, footer a:hover{
     margin: 1%;
 }
 .content-convocatory-influencer{
-    padding-right: 6%;
-    padding-left: 6%;
-    margin: 1% auto;
+    margin: .5% auto;
 }
 .content-convocatory-influencer .content-text{
     background: #DA4453;  /* fallback for old browsers */
@@ -828,7 +825,16 @@ footer a, footer a:hover{
     background: linear-gradient(to right, #89216B, #DA4453); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-family: sans-serif;
     color: #FFF;
+    height: 40vh;
     padding: 2%;
+}
+.content-convocatory-influencer .icons-star-home{
+    text-align: center;
+}
+.content-convocatory-influencer .icons-star-home svg{
+    height: 1em;
+    margin: .5%;
+    width: 1em;
 }
 .content-convocatory-influencer .content-text h2, 
 .content-convocatory-influencer .content-text p{
