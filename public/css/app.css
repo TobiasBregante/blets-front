@@ -12,7 +12,7 @@ body::-webkit-scrollbar-track {
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 50px;
-    background-color: darkgrey;
+    background-color: #a9a9a9;
 }
 
 body, .breadcrumb{
@@ -131,7 +131,7 @@ header{
     transition: .3s;
 }
 @media(max-width: 1090px){
-    .content-convocatory-influencer{
+    .content-convocatory-influencer, .intro-home-info{
         padding: 0 !important;
         font-size: 13px !important;
     }
@@ -348,8 +348,12 @@ footer li{
 footer a, footer a:hover{
     color: #424242;
 }
+.section-login-register{
+    background: #DA4453;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #89216B, #DA4453);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #89216B, #DA4453); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .content-frm-login{
-    border: 2px solid #FF007B;
     margin-top: 0 !important;
     border-radius: 5px;
     padding: 3%;
@@ -428,6 +432,9 @@ footer a, footer a:hover{
     display: block;
     margin-top: 2%;
     width: 100%;
+}
+.content-metrics-header-mybusiness{
+    color: #000;
 }
 .content-metrics-header-mybusiness ul{
     background-color: rgb(215, 219, 221);
@@ -518,7 +525,12 @@ footer a, footer a:hover{
     left: 0;
     top: 0;
 }
-.info-influencer-home .btn{
+.info-influencer-home .btn-apply-influencer{
+    background-color: #e83e8c;
+    font-weight: 600;
+    display: inline-block;
+    color: #FFF;
+    margin: 0;
     margin-top: 1%;
 }
 .info-influencer-home p{
@@ -544,6 +556,7 @@ footer a, footer a:hover{
     border-radius: 0 !important;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .3);
     border: 0 !important;
+    color: #000;
 }
 .title-gestion{
     font-weight: 600;
@@ -628,6 +641,7 @@ footer a, footer a:hover{
     border: 2px solid transparent;
     min-height: 100px;
     transition: .3s;
+    color: #424242;
 }
 .col-sells:hover{
     border: 2px solid #FF007B;
@@ -794,27 +808,101 @@ footer a, footer a:hover{
     font-size: 20px;
 }
 .presentation-influencer-home{
-    padding: 0;
-    margin-bottom: 1% auto;
+    padding-left: 1.02%;
+    padding-right: 1.02%;
+    margin: 1.7% auto;
+    height: 50vh;
 }
-.presentation-influencer-home .btn{
-    background-color: #e83e8c;
+.insign-presentation{
+    position: absolute;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+.btn-access-text-home{
+    font-size: 1.2em;
+    min-width: 150px;
+    padding: .7%;
+}
+.presentation-influencer-home a{
+    margin: 0 !important;
+    margin-left: 1%;
+    padding: 0;
+    padding: .5%;
     color: #FFF;
 }
 .presentation-1-home{
+    background-image: url('../img//banner-home-publicty.jpg');
+    background-color: rgb(216, 175, 173);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    background-size: contain;
     padding: 0 !important;
     position: relative;
+}
+.presentation-1-home .content-text{
+    background: linear-gradient(45deg, rgba(232, 62, 140, .5), rgba(232, 62, 140, 0));
+    /*transform: skew(-20deg);*/
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    bottom: 0;
+    left: 0;
+}
+.presentation-1-home-text{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute;
+    font-size: 23px;
+    margin-left: 20px;
+    width: 90%;
+    margin-bottom: 1% !important;
+    font-weight: 600;
+    color: #ECF0F1;
+    padding: 2%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
 }
 .ico-payments{
     width: 50px;
     margin: 1%;
     height: auto;
 }
-.view-more-btn{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 1%;
+.intro-home-info .content-text{
+    background: #DA4453;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #89216B, #DA4453);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #89216B, #DA4453); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #FFF;
+    min-height: 10vh;
+    padding: 2%;
+}
+.banner-publicitary-home, .intro-home-info{
+    margin: .5% auto;
+}
+.banner-publicitary-home .content-text{
+    background-image: url('../img/back-publicity.jpg');
+    background-position: top;
+    background-size: cover;
+    background-color: rgb(215, 219, 221);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-height: 10vh;
+    font-weight: 600;
+    color: #FFF;
 }
 .content-convocatory-influencer{
     margin: .5% auto;
@@ -825,7 +913,7 @@ footer a, footer a:hover{
     background: linear-gradient(to right, #89216B, #DA4453); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-family: sans-serif;
     color: #FFF;
-    height: 40vh;
+    height: 300px;
     padding: 2%;
 }
 .content-convocatory-influencer .icons-star-home{

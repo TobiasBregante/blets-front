@@ -67,7 +67,7 @@ const Login = () => {
         setPdw(e.target.value);
     }
     return(
-        <article className="content-frm-login col-10 col-sm-10 col-lg-4 col-xl-4 m-auto bg-dark">
+        <article className="content-frm-login col-10 col-sm-10 col-lg-4 col-xl-4 m-auto">
             <h1 className='title-login'>Iniciar sesión</h1>
             <form onSubmit={handleSubmit} id='frm-login'>
                 <p ref={userWarning} className="user-warning d-none bg-danger p-2">Los datos son incorrectos</p>

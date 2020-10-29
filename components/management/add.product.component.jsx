@@ -16,6 +16,7 @@ const AddProduct = props => {
     const [business, setBusiness] = useState('');
     const [location, setLocation] = useState('');
     const [type, setType] = useState('');
+    const [subCategory, setSubCategory] = useState('');
     const [payment, setPayment] = useState('');
 
     const handleAddProduct = async () => {
@@ -42,6 +43,7 @@ const AddProduct = props => {
                 frmData.append('business', business);
                 frmData.append('location', location);
                 frmData.append('type', type);
+                frmData.append('subcategory', subCategory);
                 axios.post(`${process.env.API_PATH}/v1/product`, frmData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -79,31 +81,17 @@ const AddProduct = props => {
         setPayment('')
     }
     
-    const handleInputTitle = e => {
-        setTitle(e.target.value)
-    }
-    const handleInputDescription = e => {
-        setDescription(`${e.target.value}`)        
-    }
-    const handleInputAmount = e => {
-        setAmount(e.target.value)
-    }
-    const handleInputDiscount = e => {
-        setDiscount(e.target.value)
-    }
-    const handleInputShipping = e => {
-        setShipping(e.target.value)
-    }
-    const handleInputBusiness = e => {
-        setBusiness(e.target.value)
-    }
-    const handleInputLocation = e => {
-        setLocation(e.target.value)
-    }
-    const handleInputType= e => {
-        setType(e.target.value)
-    }
-    const imgPreviewProd = e => {
+    const handleInputTitle = e => setTitle(e.target.value),
+    handleInputDescription = e => setDescription(`${e.target.value}`),
+    handleInputAmount = e => setAmount(e.target.value),
+    handleInputDiscount = e => setDiscount(e.target.value),
+    handleInputShipping = e => setShipping(e.target.value),
+    handleInputBusiness = e => setBusiness(e.target.value),
+    handleInputLocation = e => setLocation(e.target.value),
+    handleInputType= e => setType(e.target.value),
+    handleInputSubCategory = e => setSubCategory(e.target.value),
+    handleInputPayment = e => setPayment(e.target.value),
+    imgPreviewProd = e => {
         let reader = new FileReader()
         reader.onloadend = () => {
             setImageProd(reader.result);
@@ -114,9 +102,6 @@ const AddProduct = props => {
         }else{
             setImageProd('');
         }
-    }
-    const handleInputPayment = e => {
-        setPayment(e.target.value);
     }
     return(
         <>
@@ -155,6 +140,15 @@ const AddProduct = props => {
                         <option value="viajes">Viajes</option>
                         <option value="zapatos">Zapatos</option>
                         <option value="empleos">Empleos</option>
+                    </select>
+                    <small className='p-2 m-0'>Sub-categoría <span className='text-danger'>*</span></small>
+                    <select required onChange={handleInputSubCategory} className='d-block bg-light'>
+                        <option value="null">No</option>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                        <option value="niños">Niños</option>
+                        <option value="invierno">Invierno</option>
+                        <option value="verano">Verano</option>
                     </select>
                     <small className='p-2 m-0'>Precio <span className='text-danger'>*</span></small>
                     <input required onChange={handleInputAmount} className='d-block' type="text" placeholder='Precio' value={amount}/>

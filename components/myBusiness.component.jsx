@@ -1,10 +1,8 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Router from 'next/router';
 import SuperUser from './superUser/create.user.component';
 import AddProduct from './management/add.product.component';
-import EditProduct from './management/edit.product.component';
-import RemoveProduct from './management/remove.product.component';
 import ShowMetrics from './management/show.metrics.component';
 
 const MyBusinessComp = () => {

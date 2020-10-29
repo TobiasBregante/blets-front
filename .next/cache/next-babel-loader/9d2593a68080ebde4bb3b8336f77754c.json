@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport ProductSubcategoryComp from '../../../modules/product.subcategory.module';\n\nvar ProductSubcategory = function ProductSubcategory() {\n  return __jsx(ProductSubcategoryComp, null);\n};\n\nexport default ProductSubcategory;","map":null,"metadata":{},"sourceType":"module"}

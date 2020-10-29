@@ -2,6 +2,7 @@ import Head from '../components/head.component';
 import Header from '../components/header.component';
 import Footer from '../components/footer.component';
 import { CookiesProvider } from 'react-cookie';
+import Link from 'next/link'
 
 const Home = () => {
     return(
@@ -10,7 +11,7 @@ const Home = () => {
             <Head/>
             <main className="container-fluid">
                 <Header/>
-                <article className='row d-none'>
+                <article className='row'>
                     <article className='col-12 col-sm-12 col-lg-12 col-xl-12 banner-influencer-home'>
                         <article className='col-12 p-5 m-auto info-influencer-home'>
                             <p>
@@ -22,17 +23,38 @@ const Home = () => {
                                 DE <span className='text-warning'>PROMOCIÓN</span> POR EXCELENCIA EN LAS 
                                 <span className='text-warning'> REDES SOCIALES.</span>
                             </p>
-                            <a href="/" className='btn btn-warning'>Más información</a>
+                            <a href="https://api.whatsapp.com/send?phone=5491156168994&text=Hola!%20Me%20interesa%el%plan%empresa!" 
+                                target='_blank' className='btn btn-apply-influencer col-12 col-sm-10 col-lg-6 col-xl-3'>Más información!</a>
                         </article>
                     </article>
                 </article>
                 <section className="row section-home">
                     <article className='presentation-influencer-home col-12 col-sm-12 col-lg-12 col-xl-12'>
                         <article className='col-12 presentation-1-home'>
-                            <img src="../img/influencer-2.svg" alt="Influencer"/>
-                            <a href="https://api.whatsapp.com/send?phone=5491156168994&text=Hola!%20Me%20interesa%el%plan%empresa!" 
-                                target='_blank' 
-                                className='view-more-btn btn'>Más información</a>
+                            <article className='content-text'/>
+                            <p className='presentation-1-home-text'>
+                                Compra de una manera más flexible<br/>con descuentos e increíbles ofertas!<br/>
+                                <Link href="/registrarme" as="/registrarme">
+                                    <a className="content-btn-register-now nav-link d-inline"><span className={`btn btn-register-now btn-search`}>Regístrate ahora!</span></a>
+                                </Link>
+                                <Link href="/iniciar-sesion" as="/iniciar-sesion">
+                                    <a className="content-btn-register-now nav-link d-inline"><span className={`btn btn-login-now btn-secondary`}>Ingresar</span></a>
+                                </Link>
+                            </p>
+                            <img className='insign-presentation' src="img/brand.png" alt="Blets"/>
+                        </article>
+                    </article>
+                    <article className='intro-home-info col-12 col-sm-12 col-lg-12 col-xl-12'>
+                        <p className='content-text'>
+                            Contactamos a diferentes empresas con el propósito de que ya no paguen 
+                            mas publicidad en las redes sociales, que los influencers y vendedores 
+                            puedan generar ingresos por su recomendación y que los clientes obtengan 
+                            beneficios de todo tipo.
+                        </p>
+                    </article>
+                    <article className='banner-publicitary-home col-12 col-sm-12 col-lg-12 col-xl-12'>
+                        <article className='content-text'>
+                            <p>Espacio publicitario</p>
                         </article>
                     </article>
                     <article className='content-convocatory-influencer col-12 col-sm-12 col-lg-6 col-xl-6'>

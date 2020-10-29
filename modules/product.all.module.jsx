@@ -4,7 +4,7 @@ import Footer from '../components/footer.component';
 import ProductAll from '../components/product/product.all.component';
 import { CookiesProvider } from 'react-cookie';
 
-const Home = () => {
+const ProductCategory = () => {
     return(
         <>
         <CookiesProvider>
@@ -23,4 +23,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default ProductCategory;

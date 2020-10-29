@@ -101,7 +101,7 @@ const Register = () => {
         setEmail(e.target.value);
     }
     return(
-        <article className="content-frm-login col-10 col-sm-10 col-lg-4 col-xl-4 m-auto bg-dark">
+        <article className="content-frm-login col-10 col-sm-10 col-lg-4 col-xl-4 m-auto">
             <h1 className='title-register'>Regístrate ahora</h1>
             <form onSubmit={handleSubmit} id='frm-login'>
                 <p ref={userSuccess} className="user-warning d-none bg-success p-2">Se ha creado exitosamente!</p>

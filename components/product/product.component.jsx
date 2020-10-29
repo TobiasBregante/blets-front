@@ -125,6 +125,13 @@ const Product = prop => {
                         <li>
                             - Categoría: <span className='text-light'><strong>{product.type}</strong></span><br/>
                         </li>
+                        {
+                            product.subcategory 
+                            ? <li>
+                                - Edición: <span className='text-light'><strong>{product.subcategory}</strong></span>
+                            </li>
+                            : '' 
+                        }
                         <li>
                             - Nombre del negocio: <span className='text-light'><strong>{product.business}</strong></span>
                         </li>

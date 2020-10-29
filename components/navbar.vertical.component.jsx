@@ -87,35 +87,40 @@ const NavbarVertical = () => {
                     Indumentarias
                     <ul className={`m-0 pl-4 ${subCategory}`}>
                         <li className="nav-item">
-                            <Link href="/">
+                            <Link href="/categorias/subcategorias/[subcategory]" 
+                                as="/categorias/subcategorias/hombre">
                                 <a className="nav-link">
                                     Hombre
                                 </a>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/">
+                            <Link href="/categorias/subcategorias/[subcategory]" 
+                                as="/categorias/subcategorias/mujer">
                                 <a className="nav-link">
                                     Mujer
                                 </a>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/">
+                            <Link href="/categorias/subcategorias/[subcategory]" 
+                                as="/categorias/subcategorias/niños">
                                 <a className="nav-link">
                                     Niños
                                 </a>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/">
+                            <Link href="/categorias/subcategorias/[subcategory]" 
+                                as="/categorias/subcategorias/invierno">
                                 <a className="nav-link">
                                     Invierno
                                 </a>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/">
+                            <Link href="/categorias/subcategorias/[subcategory]" 
+                                as="/categorias/subcategorias/verano">
                                 <a className="nav-link">
                                     Verano
                                 </a>

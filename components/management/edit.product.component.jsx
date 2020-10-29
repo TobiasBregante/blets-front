@@ -20,6 +20,7 @@ const EditProduct = prop => {
     const [business, setBusiness] = useState('');
     const [location, setLocation] = useState('');
     const [type, setType] = useState('');
+    const [subCategory, setSubCategory] = useState('');
     const [payment, setPayment] = useState('');
     const handleUpdateProduct = async () => {
         await fetch(`${process.env.API_PATH}/v1/auth`, {
@@ -36,6 +37,7 @@ const EditProduct = prop => {
             if(success.auth){
                 let frmData = new FormData();
                 frmData.append('imgPublicId', prop.product.img);
+                console.log(prop.product.img)
                 frmData.append('img', imgRef.current.files[0]);
                 frmData.append('title', title);
                 frmData.append('description', description);
@@ -46,6 +48,7 @@ const EditProduct = prop => {
                 frmData.append('business', business);
                 frmData.append('location', location);
                 frmData.append('type', type);
+                frmData.append('subcategory', subCategory);
                 axios.put(`${process.env.API_PATH}/v1/product/update/${prop.product._id}`, frmData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -73,31 +76,18 @@ const EditProduct = prop => {
         e.preventDefault()
         handleUpdateProduct()
     }
-    const handleInputTitle = e => {
-        setTitle(e.target.value)
-    }
-    const handleInputDescription = e => {
-        setDescription(e.target.value)
-    }
-    const handleInputAmount = e => {
-        setAmount(e.target.value)
-    }
-    const handleInputDiscount = e => {
-        setDiscount(e.target.value)
-    }
-    const handleInputShipping = e => {
-        setShipping(e.target.value)
-    }
-    const handleInputBusiness = e => {
-        setBusiness(e.target.value)
-    }
-    const handleInputLocation = e => {
-        setLocation(e.target.value)
-    }
-    const handleInputType= e => {
-        setType(e.target.value)
-    }
-    const imgPreviewProd = e => {
+
+    const handleInputTitle = e => setTitle(e.target.value),
+    handleInputDescription = e => setDescription(`${e.target.value}`),
+    handleInputAmount = e => setAmount(e.target.value),
+    handleInputDiscount = e => setDiscount(e.target.value),
+    handleInputShipping = e => setShipping(e.target.value),
+    handleInputBusiness = e => setBusiness(e.target.value),
+    handleInputLocation = e => setLocation(e.target.value),
+    handleInputType= e => setType(e.target.value),
+    handleInputSubCategory = e => setSubCategory(e.target.value),
+    handleInputPayment = e => setPayment(e.target.value),
+    imgPreviewProd = e => {
         let reader = new FileReader()
         reader.onloadend = () => {
             setImageProd(reader.result);
@@ -107,15 +97,12 @@ const EditProduct = prop => {
         }else{
             setImageProd('');
         }
-    }
-    const handleInputPayment = e => {
-        setPayment(e.target.value);
-    }
-    const handlerOpenEdit = () => {
+    },
+    handlerOpenEdit = () => {
         frmUpdate.current.classList.remove('d-none')
         beforeFrm.current.classList.remove('d-none');
-    }
-    const handlerCloseEdit = () => {
+    },
+    handlerCloseEdit = () => {
         frmUpdate.current.classList.add('d-none')
         beforeFrm.current.classList.add('d-none');
     }
@@ -166,6 +153,15 @@ const EditProduct = prop => {
                         <option value="viajes">Viajes</option>
                         <option value="zapatos">Zapatos</option>
                     </select>
+                    <small className='p-2 m-0'>Sub-categoría <span className='text-danger'>*</span></small>
+                    <select required onChange={handleInputSubCategory} className='d-block bg-light'>
+                        <option value="null">No</option>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                        <option value="niños">Niños</option>
+                        <option value="invierno">Invierno</option>
+                        <option value="verano">Verano</option>
+                    </select>
                     <small className='p-2 m-0'>Precio <span className='text-danger'>*</span></small>
                     <input onChange={handleInputAmount} className='d-block' type="text" placeholder='Precio' value={amount}/>
                     <small className='p-2 m-0'>Descuento <span className='text-danger'>*</span></small>
@@ -184,8 +180,8 @@ const EditProduct = prop => {
                         <option value="true">Acepto envíos</option>
                         <option value="false">No acepto envíos</option>
                     </select>
-                    <input onChange={handleInputTitle} type="submit" value="Agregar" className='d-block btn'/>
-                    <p className={`bg-success text-light add-success ${titleSuccessProduct}`}>Se ha insertado con éxito!</p>
+                    <input onChange={handleInputTitle} type="submit" value="Editar" className='d-block btn'/>
+                    <p className={`bg-success text-light add-success ${titleSuccessProduct}`}>Se ha editado con éxito!</p>
                 </form>
             </article>
         </article>

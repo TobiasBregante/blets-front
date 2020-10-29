@@ -11,7 +11,7 @@ const Login = () => {
             <Head/>
             <main className="container-fluid">
                 <Header/>
-                <section className="row section-home bg-dark">
+                <section className="row section-home section-login-register">
                     <LoginComp/>
                 </section>
                 <Footer/>

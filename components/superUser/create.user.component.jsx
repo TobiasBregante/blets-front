@@ -184,6 +184,7 @@ const SuperUser = () => {
                         <option value="master">Administrador</option>
                         <option value="influencer">Influencer</option>
                         <option value="seller">Ventas y cobranzas</option>
+                        <option value="indumentarias">Indumentaria</option>
                     </select>
                 </label>
                 <small>Generar token promocional <span className="text-danger">*</span></small>

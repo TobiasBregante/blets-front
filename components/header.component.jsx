@@ -14,9 +14,9 @@ const Header = () => {
     const [userLogged, setUserLogged] = useState('d-none');
     const [userLoggedSellers, setUserLoggedSellers] = useState('d-none');
     const [userLoggedInfluencer, setUserLoggedInfluencer] = useState('d-none');
+    const [userLoggedBusiness, setUserLoggedBusiness] = useState('d-none');
     const [stateNav, setStateNav] = useState('navbar-vertical-close');
     const [navbarContent, setNavbarContent] = useState('navbar-content-close');
-
     const Logout = () => {
         removeCookie('user');
         document.cookie.split(";").forEach((c) => {
@@ -44,6 +44,9 @@ const Header = () => {
                     setUserLoggedSellers('');
                 }else{
                     setUserLoggedSellers('d-none');
+                    if(cookies.user && cookies.user.rol === 'indumentarias'){
+                        setUserLoggedBusiness('');
+                    }
                 }
             }
         }
@@ -99,6 +102,11 @@ const Header = () => {
                         <li className={`nav-item ${userLogged}`}>
                             <Link href="/mi-negocio" as="/mi-negocio">
                                 <a className="nav-link">Mi negocio</a>
+                            </Link>
+                        </li>
+                        <li className={`nav-item ${userLoggedBusiness}`}>
+                            <Link href="/negocios" as="/negocio">
+                                <a className="nav-link">Negocio</a>
                             </Link>
                         </li>
                         <li className={`nav-item ${userLoggedInfluencer}`}>
