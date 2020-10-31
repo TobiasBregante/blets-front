@@ -72,7 +72,7 @@ const Home = () => {
                                 y beneficios como vendedor
                             </p>
                             <a href="https://api.whatsapp.com/send?phone=5491156168994&text=Hola!%20Me%20interesa%el%plan%influencer!" 
-                            target='_blank' className='btn btn-apply-influencer col-12 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
+                            target='_blank' className='btn btn-apply-influencer col-6 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
                             <article className='col-12 icons-star-home'>
                                 <svg viewBox="0 0 16 16" 
                                     className="bi bi-star-fill" 
@@ -110,7 +110,7 @@ const Home = () => {
                                 diversas comunidades.
                             </p>
                             <a href="https://api.whatsapp.com/send?phone=5491156168994&text=Hola!%20Me%20interesa%el%plan%empresa!" 
-                                target='_blank' className='btn btn-apply-influencer col-12 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
+                                target='_blank' className='btn btn-apply-influencer col-6 col-sm-10 col-lg-6 col-xl-4'>Aplicar ahora!</a>
                             <article className='col-12 icons-star-home'>
                                 <svg viewBox="0 0 16 16" 
                                     className="bi bi-star-fill" 
