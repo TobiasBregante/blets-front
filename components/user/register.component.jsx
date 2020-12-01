@@ -13,6 +13,7 @@ const Register = () => {
     const [geoData, setGeoData] = useState([]);
     const [fullname, setFullname] = useState('');
     const [location, setLocation] = useState('');
+    const userWarningNull = useRef(null);
     const userWarning = useRef(null);
     const userSuccess = useRef(null);
     // user cookie
@@ -48,33 +49,49 @@ const Register = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     // handler of the start session of the login
     const userSessionStart = async (username, userPdw) => {
-        const res = await fetch(`${process.env.API_PATH}/v1/user/signup`, {
-            body: JSON.stringify({
-                since_create: valueDate.toLocaleDateString("es-AR", options),
-                username: username,
-                fullname: fullname,
-                location: location, 
-                pdw: userPdw, 
-                email: userEmail
-            }), 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            }
-        })
-        const datares = await res.json()
-        if(!datares.create_user){
-            userWarning.current.classList.toggle('d-block');
-            setTimeout(() => {
+        let statusDataUser = true
+        const dataVerifyUser = [
+            username,
+            fullname,
+            location, 
+            userPdw, 
+            userEmail
+        ]
+        dataVerifyUser.forEach(element => {if(element === '') return statusDataUser = false})
+        if(statusDataUser){
+            const res = await fetch(`${process.env.API_PATH}/v1/user/signup`, {
+                body: JSON.stringify({
+                    since_create: valueDate.toLocaleDateString("es-AR", options),
+                    username: username,
+                    fullname: fullname,
+                    location: location, 
+                    pdw: userPdw, 
+                    email: userEmail
+                }), 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+            const datares = await res.json()
+
+            if(!datares.create_user){
                 userWarning.current.classList.toggle('d-block');
-            }, 2500)
-        }else{
-            console.log(datares)
-            userSuccess.current.classList.toggle('d-block');
-            setTimeout(() => {
+                setTimeout(() => {
+                    userWarning.current.classList.toggle('d-block');
+                }, 2500)
+            }else{
                 userSuccess.current.classList.toggle('d-block');
-                window.location = '/iniciar-sesion';
+                setTimeout(() => {
+                    userSuccess.current.classList.toggle('d-block');
+                    window.location = '/iniciar-sesion';
+                }, 2500)
+            }
+        }else{
+            userWarningNull.current.classList.toggle('d-block');
+            setTimeout(() => {
+                userWarningNull.current.classList.toggle('d-block');
             }, 2500)
         }
     }
@@ -106,6 +123,7 @@ const Register = () => {
             <form onSubmit={handleSubmit} id='frm-login'>
                 <p ref={userSuccess} className="user-warning d-none bg-success p-2">Se ha creado exitosamente!</p>
                 <p ref={userWarning} className="user-warning d-none bg-secondary p-2">Este usuario ya existe</p>
+                <p ref={userWarningNull} className="user-warning d-none bg-secondary p-2">Los datos están incompletos</p>
                 <input onChange={handleChangeFullname} type="text" name="fullname" placeholder='Nombre completo'/>
                 <input onChange={handleChangeUsername} type='text' name='user' placeholder='Nombre de usuario'/>
                 <input onChange={handleChangeEmail} type='email' name='email' placeholder='Correo electrónico'/>

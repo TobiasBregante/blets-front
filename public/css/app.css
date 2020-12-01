@@ -968,3 +968,31 @@ footer a, footer a:hover{
 .content-convocatory-influencer .content-text li{
     padding: 1%;
 }
+.content-onload-shadow{
+    background-color: rgba(0, 0, 0, .8);
+    text-align: center;
+    padding: 5%;
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+.content-onload-shadow .shop{
+    height: 5em;
+    width: 5em;
+}
+@keyframes onloadRotate {
+    from { transform: rotate(-360deg); };
+}
+.content-onload-shadow .onload-ico{
+    animation: onloadRotate 1s infinite;
+    height: 3em;
+    width: 3em;
+}
+.content-onload-shadow h2{
+    font-weight: 600;
+    font-size: 20px;
+    margin: 2%;
+}

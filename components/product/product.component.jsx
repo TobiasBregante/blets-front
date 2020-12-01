@@ -91,6 +91,7 @@ const Product = prop => {
             })
             const dataFetch = await fetchAll.json();
             setProduct(dataFetch);
+            console.log(dataFetch)
         }
         getAllProduct()
     }, [id])
@@ -190,7 +191,7 @@ const Product = prop => {
                             <li className='p-1'>Hacé click en <small>"Compralo en un instante!"</small></li>
                             <li className='p-1'>Hacé el pago con Mercado Pago</li>
                             <li className='p-1'>Sacale una foto o screenshot al comprobante de pago</li>
-                            <li className='p-1'><a href='#' className='btn btn-success'>Envíalo por WhatsApp!</a></li>
+                            <li className='p-1'><a href={product.contact_business} className='btn btn-success'>Envíalo por WhatsApp!</a></li>
                         </ol>
                     </article>
                     <article className={`col-12 accept-payment ${acceptPaymentSwitch}`}>
@@ -202,7 +203,7 @@ const Product = prop => {
                                 </a>
                                 <p className='mt-4 content-cbu'>
                                     CBU: <span className='text-warning'>
-                                    0720006988000038698918
+                                    {product.CBU}
                                     </span>
                                 </p><hr/>
                                 <p>

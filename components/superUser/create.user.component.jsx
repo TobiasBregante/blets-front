@@ -3,6 +3,8 @@ import { useRef } from 'react'
 import { useEffect } from "react";
 import { useState } from "react";
 import { useCookies } from 'react-cookie';
+import categoryList from '../management/category.list.component';
+import OnloadComponent from '../onload.component';
 
 const SuperUser = () => {
     const inputTokenInfluencer = useRef(null);
@@ -20,7 +22,9 @@ const SuperUser = () => {
     const [followers, setFollowers] = useState('');
     const [pdwVerify, setPdwVerify] = useState('');
     const [business, setBusiness] = useState('');
+    const [contact, setContact] = useState('');
     const [rol, setRol] = useState('');
+    const [CBU, setCBU] = useState('');
     const userDenied = useRef(null);
     const userWarning = useRef(null);
     const userSuccess = useRef(null);
@@ -30,6 +34,8 @@ const SuperUser = () => {
     const [viewPdw, setViewPdw] = useState('password');
     const [viewPdwClose, setViewPdwClose] = useState('d-none');
     const [viewPdwOpen, setViewPdwOpen] = useState('d-block');
+    const [onLoadAdd, setOnLoadAdd] = useState(false);
+    const [hiddenBtn, setHiddenBtn] = useState('d-block');
 
     // array list of South América provinces, Argentina
     useEffect(() => {
@@ -68,7 +74,9 @@ const SuperUser = () => {
                 location: location, 
                 business: business,
                 followers: followers,
-                rol: rol
+                rol: rol,
+                contact_business: contact,
+                CBU: CBU
             }), 
             method: 'POST',
             headers: {
@@ -101,12 +109,16 @@ const SuperUser = () => {
         })
         const datares = await res.json()
         if(datares.status == 401){
+            setOnLoadAdd(false)
+            setHiddenBtn('d-block')
             console.warn(datares)
             userDenied.current.classList.toggle('d-block');
             setTimeout(() => {
                 userDenied.current.classList.toggle('d-block');
             }, 2500)
         }else{
+            setOnLoadAdd(false)
+            setHiddenBtn('d-block')
             userSessionStart(user, pdw);
             statusUser = true;
         }
@@ -115,36 +127,44 @@ const SuperUser = () => {
     // event submit and get data of the user for the login
     const handleSubmit = e => {
         e.preventDefault()
+        setOnLoadAdd(true)
+        setHiddenBtn('d-none')
         // get for parameter the data of the form login for your verification 
         handlerVerifyMaster(cookies.user.user, pdwVerify)
     }
     // handler value input username
     const handleChangeUsername = e => {
         setUser(e.target.value);
-    }
-    const handleChangeFullname = e => {
+    },
+    handleChangeFullname = e => {
         setFullname(e.target.value);
-    }
-    const handleChangeLocation = e => {
+    },
+    handleChangeLocation = e => {
         setLocation(e.target.value);
-    }
-    const handleChangePdw = e => {
+    },
+    handleChangePdw = e => {
         setPdw(e.target.value);
-    }
-    const handleChangeEmail = e => {
+    },
+    handleChangeEmail = e => {
         setEmail(e.target.value);
-    }
-    const handleChangeFollowers = e => {
+    },
+    handleChangeFollowers = e => {
         setFollowers(e.target.value);
-    }
-    const handleChangeRol = e => {
+    },
+    handleChangeRol = e => {
         setRol(e.target.value);
-    }
-    const handleChangePdwVerify = e => {
+    },
+    handleChangePdwVerify = e => {
         setPdwVerify(e.target.value);
-    }
-    const handleChangeBusiness = e => {
+    },
+    handleChangeBusiness = e => {
         setBusiness(e.target.value);
+    },
+    handlerChangeContact = e => {
+        setContact(e.target.value);
+    },
+    handlerChangeCBU = e => {
+        setCBU(e.target.value);
     }
 
     return(
@@ -165,6 +185,10 @@ const SuperUser = () => {
                 <input onChange={handleChangePdw} className='d-block' type="password" placeholder='Contraseña'/>
                 <small>Correo electrónico <span className="text-danger">*</span></small>
                 <input onChange={handleChangeEmail} type='email' name='email' placeholder='Correo electrónico'/>
+                <small>Número de contácto (recibir pedidos)</small>
+                <input onChange={handlerChangeContact} type="text" name="contact_business" className="d-block" placeholder='Número de contácto (recibir pedidos)'/>
+                <small>CBU de ingresos</small>
+                <input onChange={handlerChangeCBU} type="text" name="CBU" className="d-block" placeholder='CBU de ingresos'/>
                 <small>Nombre de negocio <span className="text-danger">*</span></small>
                 <input onChange={handleChangeBusiness} className='d-block' type="text" placeholder='Nombre de negocio'/>
                 <small>Nº seguidores <span className="text-danger">*</span></small>
@@ -184,7 +208,11 @@ const SuperUser = () => {
                         <option value="master">Administrador</option>
                         <option value="influencer">Influencer</option>
                         <option value="seller">Ventas y cobranzas</option>
-                        <option value="indumentarias">Indumentaria</option>
+                        {
+                            categoryList.map((element, i) => (
+                                <option value={element.category}>{element.title}</option>
+                            ))
+                        }
                     </select>
                 </label>
                 <small>Generar token promocional <span className="text-danger">*</span></small>
@@ -220,13 +248,14 @@ const SuperUser = () => {
                         </svg>
                     </button>
                 </article>
-                <input type="submit" value="Agregar" className='mt-2 d-block btn'/>
+                <input type="submit" value="Agregar" className={`mt-2 ${hiddenBtn} btn`}/>
                 <p ref={userDenied} className="mt-1 user-warning d-none bg-danger p-2 text-light">Acceso denegado!</p>
                 
                 <p ref={userSuccess} className="mt-1 user-warning d-none bg-success p-2">Se ha creado exitosamente!</p>
                 <p ref={userWarning} className="mt-1 user-warning d-none bg-secondary p-2">Este usuario ya existe</p>
             </form>
         </article>
+        <OnloadComponent.OnloadUserComponent status={onLoadAdd}/>
         </>
     )
 }

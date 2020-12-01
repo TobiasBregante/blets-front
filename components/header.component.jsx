@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import InputTokenInfluencer from './get.token.influencer';
 import { useRouter } from 'next/router';
+import CategoryList from './management/category.list.component';
 
 const Header = () => {
     const Router = useRouter();
@@ -44,9 +45,8 @@ const Header = () => {
                     setUserLoggedSellers('');
                 }else{
                     setUserLoggedSellers('d-none');
-                    if(cookies.user && cookies.user.rol === 'indumentarias'){
-                        setUserLoggedBusiness('');
-                    }
+                    cookies.user 
+                    && CategoryList.forEach(element => element.category === cookies.user.rol && setUserLoggedBusiness(''))
                 }
             }
         }
@@ -105,7 +105,7 @@ const Header = () => {
                             </Link>
                         </li>
                         <li className={`nav-item ${userLoggedBusiness}`}>
-                            <Link href="/negocios" as="/negocio">
+                            <Link href="/negocios" as="/negocios">
                                 <a className="nav-link">Negocio</a>
                             </Link>
                         </li>
@@ -144,12 +144,6 @@ const Header = () => {
                         </li>
                     </ul>
                     <article className="form-inline my-2 my-lg-0">
-                        <Link href="/registrarme" as="/registrarme">
-                            <a className="content-btn-register-now nav-link"><span className={`btn btn-register-now btn-search ${viewBtnLoginRegister}`}>Regístrate ahora!</span></a>
-                        </Link>
-                        <Link href="/iniciar-sesion" as="/iniciar-sesion">
-                            <a className="content-btn-register-now nav-link"><span className={`btn btn-login-now btn-secondary ${viewBtnLoginRegister}`}>Ingresar</span></a>
-                        </Link>
                         <form onSubmit={handlerSendSearch}>
                             <input onChange={handlerInputSearch} className="form-control mr-sm-2" type="search" placeholder="Buscalo acá" aria-label="Search" value={inputSearch}/>
                             <button className="btn my-2 my-sm-0 btn-search" type="submit">Buscar</button>

@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import CategoryList from './category.list.component';
+import OnLoadComponent from '../onload.component';
 
 const AddProduct = props => {
     const imgRef = useRef(null);
@@ -16,8 +18,12 @@ const AddProduct = props => {
     const [business, setBusiness] = useState('');
     const [location, setLocation] = useState('');
     const [type, setType] = useState('');
+    const [contact, setContact] = useState('');
+    const [CBU, setCBU] = useState('');
     const [subCategory, setSubCategory] = useState('');
     const [payment, setPayment] = useState('');
+    const [onLoadAdd, setOnLoadAdd] = useState(false);
+    const [hiddenBtn, setHiddenBtn] = useState('d-block');
 
     const handleAddProduct = async () => {
         await fetch(`${process.env.API_PATH}/v1/auth`, {
@@ -40,6 +46,8 @@ const AddProduct = props => {
                 frmData.append('discount', discount);
                 frmData.append('payment', payment);
                 frmData.append('shipping', shipping);
+                frmData.append('CBU', CBU);
+                frmData.append('contact_business', contact);
                 frmData.append('business', business);
                 frmData.append('location', location);
                 frmData.append('type', type);
@@ -53,6 +61,8 @@ const AddProduct = props => {
                 })
                 .then(productAdd => {
                     if(productAdd.data.insert){
+                        setOnLoadAdd(false)
+                        setHiddenBtn('d-block')
                         setTitleSuccessProduct('d-block');
                         setTimeout(() => {
                             setTitleSuccessProduct('d-none'); 
@@ -68,6 +78,8 @@ const AddProduct = props => {
     }
     const handlerSubmit = e => {
         e.preventDefault()
+        setOnLoadAdd(true)
+        setHiddenBtn('d-none')
         handleAddProduct()
         setLocation('')
         setDescription('')
@@ -75,6 +87,8 @@ const AddProduct = props => {
         setDiscount('')
         setShipping('')
         setBusiness('')
+        setContact('')
+        setCBU('')
         setTitle('')
         setType('')
         setImageProd('')
@@ -91,6 +105,8 @@ const AddProduct = props => {
     handleInputType= e => setType(e.target.value),
     handleInputSubCategory = e => setSubCategory(e.target.value),
     handleInputPayment = e => setPayment(e.target.value),
+    handleInputCBU = e => setCBU(e.target.value),
+    handleInputContact = e => setContact(e.target.value),
     imgPreviewProd = e => {
         let reader = new FileReader()
         reader.onloadend = () => {
@@ -120,26 +136,8 @@ const AddProduct = props => {
                     <article style={{backgroundImage: `url('${imageProd}')`}} className='img-preview-prod'></article>
                     <small className='p-2 m-0'>Categoría <span className='text-danger'>*</span></small>
                     <select required onChange={handleInputType} className='d-block bg-light'>
-                        <option value="null">-- Seleccionar una opción --</option>
-                        <option value="accesorios">Accesorios</option>
-                        <option value="belleza">Belleza</option>
-                        <option value="bolsos-y-carteras">Bolsos y Carteras</option>
-                        <option value="celulares">Celulares</option>
-                        <option value="computacion">Computación</option>
-                        <option value="consolas">Consolas</option>
-                        <option value="camaras">Cámaras</option>
-                        <option value="deportes-y-fitness">Deportes y Fitness</option>
-                        <option value="diseño">Diseño</option>
-                        <option value="electrodomesticos">Electrodomésticos</option>
-                        <option value="indumentarias">Indumentarias</option>
-                        <option value="joyas">Joyas</option>
-                        <option value="mates">Mates</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="muebles">Muebles</option>
-                        <option value="musica">Música</option>
-                        <option value="viajes">Viajes</option>
-                        <option value="zapatos">Zapatos</option>
-                        <option value="empleos">Empleos</option>
+                        <option key='-1' value="null">-- Seleccionar una opción --</option>
+                        {CategoryList.map((element, i) => <option key={i} value={element.category}>{element.title}</option>)}
                     </select>
                     <small className='p-2 m-0'>Sub-categoría <span className='text-danger'>*</span></small>
                     <select required onChange={handleInputSubCategory} className='d-block bg-light'>
@@ -158,6 +156,10 @@ const AddProduct = props => {
                     <textarea required onChange={handleInputDescription} className='d-block' value={description} placeholder='Descripción'></textarea>
                     <small className='p-2 m-0'>Link Mercado Pago <span className='text-danger'>*</span></small>
                     <input required onChange={handleInputPayment} className='d-block' type="text" placeholder='Link Mercado Pago' value={payment}/>
+                    <small className="p-2 m-0">CBU de ingresos <span className='text-danger'>*</span></small>
+                    <input onChange={handleInputCBU} type="text" name="CBU" className="d-block" placeholder='CBU de ingresos'/>
+                    <small className="p-2 m-0">Número de contácto (de pedidos) <span className='text-danger'>*</span></small>
+                    <input onChange={handleInputContact} type="text" name="contact_business" className="d-block" placeholder='Número de contácto (de pedidos)'/>
                     <small className='p-2 m-0'>Empresa <span className='text-danger'>*</span></small>
                     <input required onChange={handleInputBusiness} className='d-block' type="text" placeholder='Empresa' value={business}/>
                     <small className='p-2 m-0'>Localidad <span className='text-danger'>*</span></small>
@@ -173,6 +175,7 @@ const AddProduct = props => {
                 </form>
             </article>
         </article>
+        <OnLoadComponent.OnloadProductComponent status={onLoadAdd}/>
         </>
     )
 }

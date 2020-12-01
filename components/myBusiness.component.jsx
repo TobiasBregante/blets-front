@@ -20,7 +20,8 @@ const MyBusinessComp = () => {
     return(
         <>
         <article className="col-12 col-sm-12 col-lg-12 col-xl-12 content-title-my-business text-light mb-2 p-4">
-            <img src="img/party.png" alt="welcome" className='party-title-gestion'/><h2 className='d-inline p-4 title-gestion'>Bienvenido al Centro de Gestión, {cookies.user ? cookies.user.user : ''}</h2><span></span>
+            <img src="img/party.png" alt="welcome" className='party-title-gestion'/>
+            <p className='d-inline p-4 title-gestion'>Bienvenido al Centro de Gestión, {cookies.user && cookies.user.user}</p>
             <span className='text-light bg-dark p-2 time-gestion'>{valueDate.toLocaleDateString("es-AR", options)}</span>
         </article>
         <ShowMetrics/>
