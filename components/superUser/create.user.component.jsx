@@ -19,7 +19,7 @@ const SuperUser = () => {
     const [geoData, setGeoData] = useState([]);
     const [fullname, setFullname] = useState('');
     const [location, setLocation] = useState('');
-    const [followers, setFollowers] = useState('');
+    const [socialMedial, setSocialMedial] = useState('');
     const [pdwVerify, setPdwVerify] = useState('');
     const [business, setBusiness] = useState('');
     const [contact, setContact] = useState('');
@@ -73,7 +73,7 @@ const SuperUser = () => {
                 public_token: inputTokenInfluencer.current.value,
                 location: location, 
                 business: business,
-                followers: followers,
+                social_medial: socialMedial,
                 rol: rol,
                 contact_business: contact,
                 CBU: CBU
@@ -148,8 +148,8 @@ const SuperUser = () => {
     handleChangeEmail = e => {
         setEmail(e.target.value);
     },
-    handleChangeFollowers = e => {
-        setFollowers(e.target.value);
+    handleChangeSocialMedial = e => {
+        setSocialMedial(e.target.value);
     },
     handleChangeRol = e => {
         setRol(e.target.value);
@@ -192,7 +192,7 @@ const SuperUser = () => {
                 <small>Nombre de negocio <span className="text-danger">*</span></small>
                 <input onChange={handleChangeBusiness} className='d-block' type="text" placeholder='Nombre de negocio'/>
                 <small>Nº seguidores <span className="text-danger">*</span></small>
-                <input onChange={handleChangeFollowers} className='d-block' type="text" placeholder='N° seguidores'/>
+                <input onChange={handleChangeSocialMedial} className='d-block' type="text" placeholder='N° seguidores'/>
                 <small>Localidad <span className="text-danger">*</span></small>
                 <select onChange={handleChangeLocation} name="location">
                     {

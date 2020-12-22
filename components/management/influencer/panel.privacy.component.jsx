@@ -5,7 +5,6 @@ import { useCookies } from 'react-cookie';
 const PanelPrivacy = props => {
     const [cookies, setCookie] = useCookies(['user']);
     const [influencer, setInfluencer] = useState({});
-    const [pdwPanelInfluencer, setPdwPanelInfluencer] = useState('');
     useEffect(() => {
         const handlerFetchInfluencer = async () => {
             const userFetch = await fetch(`${process.env.API_PATH}/v1/profile/influencer/${cookies.user.id}`, {
@@ -19,7 +18,6 @@ const PanelPrivacy = props => {
         }
         if(cookies.user){
             handlerFetchInfluencer();
-            setPdwPanelInfluencer(cookies.user.pdw);
         }
             
     }, [props]);
@@ -36,10 +34,7 @@ const PanelPrivacy = props => {
                 <p>Nombre usuario: <span className='bg-warning text-dark p-2'>{influencer.username}</span></p>
             </article>
             <article className='col-12 p-4 bg-primary text-light'>
-                <p>Nº seguidores: <span className='bg-warning text-dark p-2'>{influencer.followers}</span></p>
-            </article>
-            <article className='col-12 p-4 bg-primary text-light'>
-                <p>Contraseña: <span className='bg-warning text-dark p-2'>{pdwPanelInfluencer}</span></p>
+                <p>Red social: <span className='bg-warning text-dark p-2'>{influencer.social_medial}</span></p>
             </article>
             <article className='col-12 p-4 bg-primary text-light'>
                 <p>Localidad: <span className='bg-warning text-dark p-2'>{influencer.location}</span></p>

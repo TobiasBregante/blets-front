@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CurrencyFormat from 'react-currency-format';
-import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
-import { useRef } from 'react';
+import {Image, Transformation, CloudinaryContext} from 'cloudinary-react';
+import { useCookies } from 'react-cookie';
 
 const ProductAll = prop => {
+    const [cookies, setCookie] = useCookies(['user'])
     const imgContain = useRef(null)
     const Router = useRouter();
     const { categoria } = Router.query;
+    const [amount, setAmount] = useState('')
     const [product, setProduct] = useState([]);
     const [imgContentState, setImgContentState] = useState('');
     useEffect(() => {
@@ -27,9 +28,28 @@ const ProductAll = prop => {
             })
             const dataFetch = await fetchAll.json();
             setProduct(dataFetch);
+            if(!cookies.user){
+                    setAmount(
+                        <CurrencyFormat 
+                            value={dataFetch.amount} 
+                            displayType={'text'} 
+                            thousandSeparator={true} 
+                            prefix={'$'}
+                        />
+                    )
+            }else{
+                setAmount(
+                    <CurrencyFormat 
+                        value={((dataFetch.amount * dataFetch.discount) / 100)} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        prefix={'$'}
+                    />
+                )
+            }
         }
         getAllProduct()
-    }, [prop])
+    }, [])
     return(
         <>
           <nav aria-label="breadcrumb">
@@ -59,9 +79,11 @@ const ProductAll = prop => {
                                     <h5 className="card-title">{prod.title}</h5>
                                     <p className="card-text">{prod.description}</p>
                                     <p className="card-price card-text">
-                                        {(prod.amount !== 0) 
-                                        ? <CurrencyFormat value={prod.amount} displayType={'text'} thousandSeparator={true} prefix={'$'}/>
-                                        : <span className='text-success'>GRATIS</span>}
+                                        {
+                                            (product.amount !== 0) 
+                                            ? amount
+                                            : <span className='text-success'>GRATIS</span>
+                                        }
                                     </p>
                                     <p className="card-text"><small className="text-muted">{prod.last_since}</small></p>
                                 </article>

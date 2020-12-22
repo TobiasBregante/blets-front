@@ -14,16 +14,15 @@ const Product = prop => {
     const { id, name } = Router.query;
     const imgContent = useRef(null);
     const [credential, setCredential] = useState('');
-    const [imgCard, setImgCard] = useState('d-none')
     const [imgContentState, setImgContentState] = useState('');
     const [cookies, setCookie] = useCookies(['user']);
     const [product, setProduct] = useState([]);
-    const [influencerTokenExist, setInfluencerTokenExist] = useState('d-none');
-    const [userIsNotReffered, setUserIsNotReffered] = useState('')
-    const [influencerTokenNoExist, setInfluencerTokenNoExist] = useState('');
     const [acceptPaymentSwitch, setAcceptPaymentSwitch] = useState('accept-payment-close');
     const [valueBtnSwitchPayment, setValueBtnSwitchPayment] = useState('Compralo en un instante!');
     const [switchNextStepPayment, setSwitchNextStepPayment] = useState('d-none');
+    const [discountHiddeNotLogged, setDiscountHiddeNotLogged] = useState('')
+    const [amount, setAmount] = useState('')
+
     useEffect(() => {
         if(cookies.user 
             && cookies.user.rol !== 'master'){
@@ -34,19 +33,6 @@ const Product = prop => {
         if(cookies.user 
             && cookies.user.rol === 'master'){
             setCredential('true');
-        }
-        const handlerTokenExist = () => {
-            if(cookies.user 
-                && cookies.user.discount_token){
-                setInfluencerTokenExist('')
-                setInfluencerTokenNoExist('d-none')
-                setUserIsNotReffered('');
-            }else{
-                setInfluencerTokenExist('d-none')
-                setInfluencerTokenNoExist('')
-                setUserIsNotReffered('d-none');
-            }
-            //kfuiqqbr-blets
         }
         if(product.img)setImgContentState(imgContent.current.offsetWidth);
         handlerTokenExist()
@@ -91,10 +77,33 @@ const Product = prop => {
             })
             const dataFetch = await fetchAll.json();
             setProduct(dataFetch);
-            console.log(dataFetch)
+            if(cookies.user 
+                && cookies.user.discount_token 
+                && product.discount > 0 
+                || !cookies.user){
+                    setDiscountHiddeNotLogged('d-none')
+                    setAmount(
+                        <CurrencyFormat 
+                            value={dataFetch.amount} 
+                            displayType={'text'} 
+                            thousandSeparator={true} 
+                            prefix={'$'}
+                        />
+                    )
+            }else{
+                setDiscountHiddeNotLogged('')
+                setAmount(
+                    <CurrencyFormat 
+                        value={((dataFetch.amount * dataFetch.discount) / 100)} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        prefix={'$'}
+                    />
+                )
+            }
         }
         getAllProduct()
-    }, [id])
+    }, [])
     return(
         <>
         <section className="row section-product">
@@ -148,26 +157,19 @@ const Product = prop => {
             <article className="col-12 col-sm-12 col-lg-4 col-xl-4">
                 <article className="col-12">
                     <h1 className="component-info-buy">{product.title}</h1>
-                    <h4 className={`text-primary component-info-buy ${userIsNotReffered}`}>
+                    <h4 className={`text-primary component-info-buy`}>
                         {(product.amount !== 0) 
-                        ? <CurrencyFormat value={product.amount} 
-                            displayType={'text'} 
-                            thousandSeparator={true} 
-                            prefix={'$'}/>
+                        ? amount
                         : <span className='text-success'>GRATIS</span>}
                     </h4>
-                    <h4 className={`text-light component-info-buy ${influencerTokenNoExist}`}>
-                        {(product.amount !== 0) 
-                        ? <CurrencyFormat value={product.amount} displayType={'text'} thousandSeparator={true} prefix={'$'}/>
-                        : <span className='text-success'>GRATIS</span>}
-                    </h4>
-                    <strike className={influencerTokenExist}>
-                        <h5 className={`text-secondary component-info-buy ${(product.discount === 0) ? 'd-none' : ''}`}>
-                            <CurrencyFormat value={(product.amount * product.discount) / 100} 
+                    <strike>
+                        <h5 className={`text-light component-info-buy ${discountHiddeNotLogged}`}>
+                            <CurrencyFormat 
+                                value={product.amount} 
                                 displayType={'text'} 
                                 thousandSeparator={true} 
                                 prefix={'$'}/>
-                        </h5 >
+                        </h5>
                     </strike>
                     <p className='col-12 col-sm-12 col-lg-6 col-xl-6 p-0 m-0'>
                         <span className={`${(!product.shipping) ? 'd-none' : 'd-block'} shipping-open bg-primary text-light`}>
@@ -191,7 +193,7 @@ const Product = prop => {
                             <li className='p-1'>Hacé click en <small>"Compralo en un instante!"</small></li>
                             <li className='p-1'>Hacé el pago con Mercado Pago</li>
                             <li className='p-1'>Sacale una foto o screenshot al comprobante de pago</li>
-                            <li className='p-1'><a href={product.contact_business} className='btn btn-success'>Envíalo por WhatsApp!</a></li>
+                            <li className='p-1'><a href={`https://api.whatsapp.com/send?phone=${product.contact_business}&text=Hola!%20Éste%20es%es%mi%pedido:${product.title}%20-%20${product.description}%20-%20$${amount}`} className='btn btn-success'>Envíalo por WhatsApp!</a></li>
                         </ol>
                     </article>
                     <article className={`col-12 accept-payment ${acceptPaymentSwitch}`}>

