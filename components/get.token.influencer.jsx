@@ -6,11 +6,11 @@ import { useCookies } from "react-cookie";
 const InputTokenInfluencer = () => {
     const Router = useRouter();
     const [tokenValue, setTokenValue] = useState('');
-    const [btnValueToken, setBtnValueToken] = useState('bg-light text-dark');
+    const [btnValueToken, setBtnValueToken] = useState('');
     const [cookies, setCookie] = useCookies(['user']);
     useEffect(() => {
         if(cookies.user && cookies.user.discount_token){
-            setBtnValueToken('bg-success text-light')
+            setBtnValueToken('d-none')
         }
     })
 
@@ -28,12 +28,12 @@ const InputTokenInfluencer = () => {
             AuthToken(tokenValue)
             .then(success => {
                 if(success.token_verify === 1){
-                    setBtnValueToken('bg-success text-light')
+                    setBtnValueToken('d-none')
                     let userCookieCredentials = cookies.user;
                     userCookieCredentials.discount_token = tokenValue;
                     setCookie('user', userCookieCredentials, { maxAge: 86400 });
                 }else{
-                    setBtnValueToken('bg-danger text-light')
+                    setBtnValueToken('')
                 }
             })
         }else{
@@ -42,8 +42,8 @@ const InputTokenInfluencer = () => {
     }
     return(
         <>
-        <form className='frm-token' onSubmit={handlerSubmit}>
-            <input onChange={handlerInputToken} className={`border-0 code-ref-input form-control ${btnValueToken}`} 
+        <form className={`frm-token ${btnValueToken}`} onSubmit={handlerSubmit}>
+            <input onChange={handlerInputToken} className={`border-0 code-ref-input form-control bg-light text-dark`} 
                 type="text" 
                 placeholder='#Código de referido' 
                 aria-label="#Código de referido"/>

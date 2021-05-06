@@ -14,10 +14,10 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
+    "/[name]/[id]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/pages/[name]/[id].js"
     ],
     "/_app": [
       "static/chunks/main.js",
@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/categorias/[categoria]": [
+    "/transacciones": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/categorias/[categoria].js"
+      "static/chunks/pages/transacciones.js"
     ]
   },
   "ampFirstPages": []

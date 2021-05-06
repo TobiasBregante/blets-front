@@ -13,8 +13,9 @@ const AddProduct = props => {
     const [titleSuccessProduct, setTitleSuccessProduct] = useState('d-none');
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
+    const [amountSale, setAmountSale] = useState('');
     const [discount, setDiscount] = useState('');
-    const [shipping, setShipping] = useState('');
+    const [shipping, setShipping] = useState('true');
     const [business, setBusiness] = useState('');
     const [location, setLocation] = useState('');
     const [type, setType] = useState('');
@@ -43,6 +44,7 @@ const AddProduct = props => {
                 frmData.append('title', title);
                 frmData.append('description', description);
                 frmData.append('amount', amount);
+                frmData.append('amount_sale', amountSale);
                 frmData.append('discount', discount);
                 frmData.append('payment', payment);
                 frmData.append('shipping', shipping);
@@ -84,8 +86,8 @@ const AddProduct = props => {
         setLocation('')
         setDescription('')
         setAmount('')
+        setAmountSale('')
         setDiscount('')
-        setShipping('')
         setBusiness('')
         setContact('')
         setCBU('')
@@ -98,8 +100,8 @@ const AddProduct = props => {
     const handleInputTitle = e => setTitle(e.target.value),
     handleInputDescription = e => setDescription(`${e.target.value}`),
     handleInputAmount = e => setAmount(e.target.value),
+    handleInputAmountSale = e => setAmountSale(e.target.value),
     handleInputDiscount = e => setDiscount(e.target.value),
-    handleInputShipping = e => setShipping(e.target.value),
     handleInputBusiness = e => setBusiness(e.target.value),
     handleInputLocation = e => setLocation(e.target.value),
     handleInputType= e => setType(e.target.value),
@@ -156,20 +158,16 @@ const AddProduct = props => {
                     <textarea required onChange={handleInputDescription} className='d-block' value={description} placeholder='Descripción'></textarea>
                     <small className='p-2 m-0'>Link Mercado Pago <span className='text-danger'>*</span></small>
                     <input required onChange={handleInputPayment} className='d-block' type="text" placeholder='Link Mercado Pago' value={payment}/>
+                    <small className='p-2 m-0'>Link Mercado Pago con descuento <span className='text-danger'>*</span></small>
+                    <input required onChange={handleInputAmountSale} type="text" className="d-block" placeholder='Link Mercado Pago con descuento'/>
                     <small className="p-2 m-0">CBU de ingresos <span className='text-danger'>*</span></small>
                     <input onChange={handleInputCBU} type="text" name="CBU" className="d-block" placeholder='CBU de ingresos'/>
-                    <small className="p-2 m-0">Número de contácto (de pedidos) <span className='text-danger'>*</span></small>
-                    <input onChange={handleInputContact} type="text" name="contact_business" className="d-block" placeholder='Número de contácto (de pedidos)'/>
+                    <small className="p-2 m-0">Teléfono <span className='text-danger'>*</span></small>
+                    <input onChange={handleInputContact} type="text" name="contact_business" className="d-block" placeholder='Teléfono'/>
                     <small className='p-2 m-0'>Empresa <span className='text-danger'>*</span></small>
                     <input required onChange={handleInputBusiness} className='d-block' type="text" placeholder='Empresa' value={business}/>
                     <small className='p-2 m-0'>Localidad <span className='text-danger'>*</span></small>
                     <input required onChange={handleInputLocation} className='d-block' type="text" placeholder='Localidad' value={location}/>
-                    <small className='p-2 m-0'>Envíos <span className='text-danger'>*</span></small>
-                    <select required onChange={handleInputShipping} className='mb-2 d-block bg-light'>
-                        <option value="null">-- Seleccionar una opción --</option>
-                        <option value="true">Acepto envíos</option>
-                        <option value="false">No acepto envíos</option>
-                    </select>
                     <input onChange={handleInputTitle} type="submit" value="Agregar" className='form-control d-block btn'/>
                     <p className={`bg-success text-light add-success ${titleSuccessProduct}`}>Se ha insertado con éxito!</p>
                 </form>

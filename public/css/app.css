@@ -39,6 +39,16 @@ header{
     padding: 0;
     color: #FFF;
 }
+.section-product{
+    min-height: 150vh;
+}
+.product-description-content{
+    margin-top: 3%;
+}
+.product-description-content h2{
+    font-weight: 600;
+    font-size: 20px;
+}
 .section-about{
     justify-content: center;
     min-height: 100vh;
@@ -463,9 +473,16 @@ footer a, footer a:hover{
 }
 .content-metrics-header-mybusiness{
     color: #000;
+    padding: 1%;
+}
+.content-metrics-header-mybusiness svg{
+    height: 2em;
+    width: 2em;
+    margin: 1%;
 }
 .content-metrics-header-mybusiness ul{
     background-color: rgb(215, 219, 221);
+    border-radius: 5px;
     text-align: center;
     display: block;
     width: 100%;
@@ -598,10 +615,6 @@ footer a, footer a:hover{
     box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
     font-weight: 600;
 }
-.content-method-buy-steps{
-    border: 2px solid #007bff;
-    border-radius: 3px;
-}
 .shipping-open{
     text-align: center;
     font-weight: 600;
@@ -650,8 +663,7 @@ footer a, footer a:hover{
     font-weight: 600;
 }
 @media(max-width: 900px){
-    .accept-payment article .btn-content .btn,
-    .content-method-buy-steps ol .btn{
+    .accept-payment article .btn-content .btn{
         font-size: 12px;
     }
 }
@@ -665,6 +677,7 @@ footer a, footer a:hover{
     display: block !important;
     box-sizing: border-box;
     margin: .3% auto;
+    border-radius: 5px;
     padding: 2%;
     border: 2px solid transparent;
     min-height: 100px;
@@ -673,7 +686,6 @@ footer a, footer a:hover{
 }
 .col-sells:hover{
     border: 2px solid #FF007B;
-    border-radius: 3px;
     transition: .3s;
 }
 .col-sells ul{
@@ -687,13 +699,26 @@ footer a, footer a:hover{
 .col-sells .btn{
     margin: 1%;
 }
-.content-description-prod-transaction{
+.content-description-prod-transaction, .content-description-prod-transaction-proof{
     box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
-.content-description-prod-transaction li{
+.content-description-prod-transaction li, .content-description-prod-transaction-proof li{
     border: 2px solid transparent;
     transition: .3s;
     display: block;
+}
+.content-description-prod-transaction-proof li{
+    font-weight: 600;
+}
+.content-description-prod-transaction-proof li p{
+    border-radius: 10px;
+    color: #424242;
+    text-align: center;
+}
+.content-description-prod-transaction-proof img{
+    border-radius: 10px;
+    width: 20vw;
+    height: auto;
 }
 .content-description-prod-transaction li:hover{
     border: 2px solid #FF007B;
@@ -723,12 +748,12 @@ footer a, footer a:hover{
     left: 0;
     top: 0;
 }
-.card-product-all .img-product-all{
+.card-product-all .card-img{
     background-repeat: no-repeat;
     background-position: left;
     background-size: contain;
-    height: 100px !important;
-    width: 50% !important;
+    height: 170px !important;
+    width: auto;
 }
 .card-product-all{
     height: 200px !important;
@@ -994,4 +1019,7 @@ footer a, footer a:hover{
     font-weight: 600;
     font-size: 20px;
     margin: 2%;
+}
+.content-sells-pending{
+    min-height: 80vh;
 }

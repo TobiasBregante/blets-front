@@ -18,6 +18,8 @@ const Header = () => {
     const [userLoggedBusiness, setUserLoggedBusiness] = useState('d-none');
     const [stateNav, setStateNav] = useState('navbar-vertical-close');
     const [navbarContent, setNavbarContent] = useState('navbar-content-close');
+    const [offOn, setOffOn] = useState('d-none')
+
     const Logout = () => {
         removeCookie('user');
         document.cookie.split(";").forEach((c) => {
@@ -52,8 +54,11 @@ const Header = () => {
         }
         if(cookies.user){
             setViewBtnLoginRegister('d-none')
+            cookies.user.discount_token
+            && setOffOn('')
         }else{
             setViewBtnLoginRegister('')
+            setOffOn('d-none')
         }
     }, null)
     const handlerInputSearch = e => {
@@ -141,6 +146,11 @@ const Header = () => {
                                     Cerrar sesión
                                 </a>
                             </Link>
+                        </li>
+                        <li className={`nav-item ${offOn}`}>
+                            <span className="badge bg-danger text-light p-1">
+                                Descuentos activos!
+                            </span>
                         </li>
                     </ul>
                     <article className="form-inline my-2 my-lg-0">

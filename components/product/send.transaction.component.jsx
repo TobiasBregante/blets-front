@@ -1,13 +1,18 @@
-const SendTransaction = async objectTransaction => {
-    const getFetch = await fetch(`${process.env.API_PATH}/v1/product/transaction`, {
-        body: JSON.stringify(objectTransaction),
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+import axios from "axios";
+
+const SendTransaction = async (objectTransaction, cookies) => {
+    const getFetch = await axios.post(`${process.env.API_PATH}/v1/product/transaction`, 
+        objectTransaction,
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                'Access-Control-Allow-Origin': '*',
+                'token': cookies.user.token
+            }
         }
-    });
-    const resFetch = await getFetch.json();
+    );
+    const resFetch = await getFetch.data;
     return resFetch
 }
 

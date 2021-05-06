@@ -17,7 +17,7 @@ const SuperUser = () => {
     const [pdw, setPdw] = useState('');
     const [userEmail, setEmail] = useState('');
     const [geoData, setGeoData] = useState([]);
-    const [fullname, setFullname] = useState('');
+    const [Name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [socialMedial, setSocialMedial] = useState('');
     const [pdwVerify, setPdwVerify] = useState('');
@@ -36,6 +36,13 @@ const SuperUser = () => {
     const [viewPdwOpen, setViewPdwOpen] = useState('d-block');
     const [onLoadAdd, setOnLoadAdd] = useState(false);
     const [hiddenBtn, setHiddenBtn] = useState('d-block');
+
+    const [surname, setSurname] = useState('')
+    const [streetName, setStreetName] = useState('')
+    const [streetNumber, setStreetNumber] = useState('')
+    const [zipCode, setZipCode] = useState('')
+    const [DNI, setDNI] = useState('')
+    const [areaCode, setAreaCode] = useState('')
 
     // array list of South América provinces, Argentina
     useEffect(() => {
@@ -67,7 +74,7 @@ const SuperUser = () => {
             body: JSON.stringify({
                 since_create: valueDate.toLocaleDateString("es-AR", options),
                 username: username,
-                fullname: fullname,
+                fullname: Name,
                 pdw: userPdw, 
                 email: userEmail,
                 public_token: inputTokenInfluencer.current.value,
@@ -76,7 +83,18 @@ const SuperUser = () => {
                 social_medial: socialMedial,
                 rol: rol,
                 contact_business: contact,
-                CBU: CBU
+                CBU: CBU,
+                surname: surname,
+                address: {
+                    street_name: `${streetName}`,
+                    street_number: parseInt(streetNumber),
+                    zip_code: `${zipCode}`
+                },
+                DNI: `${DNI}`,
+                phone: {
+                    number: contact,
+                    area_code: `${areaCode}`
+                }
             }), 
             method: 'POST',
             headers: {
@@ -133,39 +151,32 @@ const SuperUser = () => {
         handlerVerifyMaster(cookies.user.user, pdwVerify)
     }
     // handler value input username
-    const handleChangeUsername = e => {
-        setUser(e.target.value);
+    const handleChangeUsername = e => setUser(e.target.value),
+    handleChangeName = e => setName(e.target.value),
+    handleChangeLocation = e => setLocation(e.target.value),
+    handleChangePdw = e => setPdw(e.target.value),
+    handleChangeEmail = e => setEmail(e.target.value),
+    handleChangeSocialMedial = e => setSocialMedial(e.target.value),
+    handleChangeRol = e => setRol(e.target.value),
+    handleChangePdwVerify = e => setPdwVerify(e.target.value),
+    handleChangeBusiness = e => setBusiness(e.target.value),
+    handlerChangeContact = e => setContact(e.target.value),
+    handleChangeCBU = e => setCBU(e.target.value),
+    handleChangeSurname  = e => setSurname(e.target.value),
+    handleChangeStreetName = e => {
+        setStreetName(e.target.value)
+        console.log(streetName)
     },
-    handleChangeFullname = e => {
-        setFullname(e.target.value);
+    handleChangeStreetNumber = e => {
+        setStreetNumber(e.target.value)
+        console.log(streetNumber)
     },
-    handleChangeLocation = e => {
-        setLocation(e.target.value);
+    handleChangeZipCode = e => {
+        setZipCode(e.target.value)
+        console.log(zipCode)
     },
-    handleChangePdw = e => {
-        setPdw(e.target.value);
-    },
-    handleChangeEmail = e => {
-        setEmail(e.target.value);
-    },
-    handleChangeSocialMedial = e => {
-        setSocialMedial(e.target.value);
-    },
-    handleChangeRol = e => {
-        setRol(e.target.value);
-    },
-    handleChangePdwVerify = e => {
-        setPdwVerify(e.target.value);
-    },
-    handleChangeBusiness = e => {
-        setBusiness(e.target.value);
-    },
-    handlerChangeContact = e => {
-        setContact(e.target.value);
-    },
-    handlerChangeCBU = e => {
-        setCBU(e.target.value);
-    }
+    handleChangeDNI = e => setDNI(e.target.value),
+    handleChangeAreaCode = e => setAreaCode(e.target.value)
 
     return(
         <>
@@ -179,22 +190,34 @@ const SuperUser = () => {
             <form onSubmit={handleSubmit}>
                 <small>Nombre de usuario <span className="text-danger">*</span></small>
                 <input onChange={handleChangeUsername} className='d-block' type="text" placeholder='Nombre de usuario'/>
-                <small>Nombre completo <span className="text-danger">*</span></small>
-                <input onChange={handleChangeFullname} className='d-block' type="text" placeholder='Nombre completo'/>
+                <small>Nombre <span className="text-danger">*</span></small>
+                <input onChange={handleChangeName} className='d-block' type="text" placeholder='Nombre'/>
+                <small>Apellido <span className='text-danger'>*</span></small>
+                <input onChange={handleChangeSurname} className='d-block' type="text" placeholder='Apellido'/>
+                <small>DNI <span className='text-danger'>*</span></small>
+                <input onChange={handleChangeDNI} type="text" className="d-block" placeholder='DNI'/>
                 <small>Contraseña <span className="text-danger">*</span></small>
                 <input onChange={handleChangePdw} className='d-block' type="password" placeholder='Contraseña'/>
                 <small>Correo electrónico <span className="text-danger">*</span></small>
                 <input onChange={handleChangeEmail} type='email' name='email' placeholder='Correo electrónico'/>
-                <small>Número de contácto (recibir pedidos)</small>
-                <input onChange={handlerChangeContact} type="text" name="contact_business" className="d-block" placeholder='Número de contácto (recibir pedidos)'/>
+                <small>Teléfono (sin cod. Área)</small>
+                <input onChange={handlerChangeContact} type="text" name="contact_business" className="d-block" placeholder='Teléfono (sin cod. Área)'/>
+                <small>Código de área <span className='text-danger'>*</span></small>
+                <input onChange={handleChangeAreaCode} type="text" className="d-block" placeholder='Código de área'/>
                 <small>CBU de ingresos</small>
-                <input onChange={handlerChangeCBU} type="text" name="CBU" className="d-block" placeholder='CBU de ingresos'/>
+                <input onChange={handleChangeCBU} type="text" name="CBU" className="d-block" placeholder='CBU de ingresos'/>
                 <small>Nombre de negocio <span className="text-danger">*</span></small>
                 <input onChange={handleChangeBusiness} className='d-block' type="text" placeholder='Nombre de negocio'/>
-                <small>Nº seguidores <span className="text-danger">*</span></small>
-                <input onChange={handleChangeSocialMedial} className='d-block' type="text" placeholder='N° seguidores'/>
+                <small>Red social <span className="text-danger">*</span></small>
+                <input onChange={handleChangeSocialMedial} className='d-block' type="text" placeholder='@Red social'/>
+                <small>Calle <span className='text-danger'>*</span></small>
+                <input onChange={handleChangeStreetName} className='d-block' type="text" placeholder='Calle'/>
+                <small>Altura <span className='text-danger'>*</span></small>
+                <input onChange={handleChangeStreetNumber} className='d-block' type="text" placeholder='Altura'/>
+                <small>Código postal <span className='text-danger'>*</span></small>
+                <input onChange={handleChangeZipCode} className='d-block' type="text" placeholder='Código postal'/>
                 <small>Localidad <span className="text-danger">*</span></small>
-                <select onChange={handleChangeLocation} name="location">
+                <select onChange={handleChangeLocation} name="location" className='bg-light'>
                     {
                         geoData ? 
                         geoData.map(location => <option key={location.id}>{location.nombre}</option>) 
@@ -203,14 +226,14 @@ const SuperUser = () => {
                 </select>
                 <label className='col-12 p-0 mt-2'>
                     <span className='p-2 d-block text-light bg-dark'>Credencial de usuario</span>
-                    <select onChange={handleChangeRol} className='mt-2 d-block'>
+                    <select onChange={handleChangeRol} className='bg-light mt-2 d-block'>
                         <option value="null">-- Elegir una opción --</option>
                         <option value="master">Administrador</option>
                         <option value="influencer">Influencer</option>
                         <option value="seller">Ventas y cobranzas</option>
                         {
                             categoryList.map((element, i) => (
-                                <option value={element.category}>{element.title}</option>
+                                <option key={i} value={element.category}>{element.title}</option>
                             ))
                         }
                     </select>
