@@ -1,7 +1,19 @@
 {
+  "/[name]/[id]": "pages/[name]/[id].html",
   "/_app": "pages/_app.js",
+  "/ayuda": "pages/ayuda.html",
+  "/buscar/[keyword]": "pages/buscar/[keyword].html",
+  "/categorias/[categoria]": "pages/categorias/[categoria].html",
+  "/categorias/subcategorias/[subcategory]": "pages/categorias/subcategorias/[subcategory].html",
+  "/": "pages/index.html",
+  "/iniciar-sesion": "pages/iniciar-sesion.html",
+  "/mi-negocio": "pages/mi-negocio.html",
+  "/mi-perfil": "pages/mi-perfil.html",
+  "/negocios": "pages/negocios.html",
+  "/nosotros": "pages/nosotros.html",
+  "/registrarme": "pages/registrarme.html",
+  "/transacciones": "pages/transacciones.html",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/[name]/[id]": "pages/[name]/[id].js",
-  "/transacciones": "pages/transacciones.js"
+  "/404": "pages/404.html"
 }
