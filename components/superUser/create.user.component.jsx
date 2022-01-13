@@ -1,17 +1,14 @@
 import uniqid from 'uniqid';
-import { useRef } from 'react'
-import { useEffect } from "react";
-import { useState } from "react";
-import { useCookies } from 'react-cookie';
+import { useEffect, useRef, useState } from "react";
 import categoryList from '../management/category.list.component';
 import OnloadComponent from '../onload.component';
+import GetItem from '../localStorage/getItem';
 
 const SuperUser = () => {
     const inputTokenInfluencer = useRef(null);
     const handleCreateTokenInfluencer = () => {
-        inputTokenInfluencer.current.value = `${uniqid()}-blets`;
+        inputTokenInfluencer.current.value = `${uniqid('', '-blets')}`;
     }
-    
     // get value inputs of form login
     const [user, setUser] = useState('');
     const [pdw, setPdw] = useState('');
@@ -29,7 +26,7 @@ const SuperUser = () => {
     const userWarning = useRef(null);
     const userSuccess = useRef(null);
     // user cookie
-    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useState(GetItem('user'));
     // switch for view or not pdw when write
     const [viewPdw, setViewPdw] = useState('password');
     const [viewPdwClose, setViewPdwClose] = useState('d-none');

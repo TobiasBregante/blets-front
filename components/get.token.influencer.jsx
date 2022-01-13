@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
+import GetItem from "./localStorage/getItem";
 
 const InputTokenInfluencer = () => {
     const Router = useRouter();
     const [tokenValue, setTokenValue] = useState('');
     const [btnValueToken, setBtnValueToken] = useState('');
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useState(GetItem('user'));
+    
     useEffect(() => {
         if(cookies.user && cookies.user.discount_token){
             setBtnValueToken('d-none')

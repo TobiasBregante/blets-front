@@ -1,26 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import Router from 'next/router';
-import OnloadComponent from './management/business/add.product.component';
+import AddProduct from './management/add.product.component';
 import ShowMetrics from './management/show.metrics.component';
 import CategoryList from './management/category.list.component';
 //<ShowMetrics/>
+import GetItem from "./localStorage/getItem";
 
 const MyBusinessComp = () => {
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useState(GetItem('user'));
     const [valueDate, onChangeDate] = useState(new Date());
     const [verifyRol, setVerifyRol] = useState(false);
 
     const handlerVerifyUser = async () => {
-        let status = false
-        await cookies && cookies.user 
-        ? CategoryList.forEach(element => {
-            if(element.category === cookies.user.rol){
-                setVerifyRol(true)
-                status = true
-            }
-        })
-        : Router.push('/')
+        let status = false 
+        if(cookies?.user?.rol === 'seller' || cookies?.user?.rol === 'master'){
+            setVerifyRol(true);
+            status = true;
+        }
 
         return status
     }
@@ -37,9 +33,7 @@ const MyBusinessComp = () => {
                 <img src="img/party.png" alt="welcome" className='party-title-gestion'/><h2 className='d-inline p-4 title-gestion'>Bienvenido al Centro de Gestión, {cookies.user ? cookies.user.user : ''}</h2><span></span>
                 <span className='text-light bg-dark p-2 time-gestion'>{valueDate.toLocaleDateString("es-AR", options)}</span>
             </article>
-            <OnloadComponent.OnloadProductComponent 
-                rolSeller={cookies && cookies.user && cookies.user.rol}
-            />
+            <AddProduct/>
             </>
         )
     }

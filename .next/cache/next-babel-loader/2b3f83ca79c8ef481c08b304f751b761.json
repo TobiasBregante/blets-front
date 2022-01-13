@@ -1,0 +1,1 @@
+{"ast":null,"code":"const GetItem = itemName => {\n  return false && localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};\n};\n\nexport default GetItem;","map":null,"metadata":{},"sourceType":"module"}

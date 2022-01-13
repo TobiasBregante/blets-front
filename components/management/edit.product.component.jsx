@@ -1,17 +1,16 @@
-import { useRef } from "react";
-import { useState } from "react";
-import { useCookies } from 'react-cookie';
+import { useRef, useState } from "react";
 import axios from 'axios';
 import { useRouter } from "next/router";
 import CategoryList from './category.list.component';
 import OnLoadComponent from '../onload.component';
+import GetItem from '../localStorage/getItem'
 
 const EditProduct = prop => {
     const Router = useRouter();
     const frmUpdate = useRef(null);
     const beforeFrm = useRef(null);
     const imgRef = useRef(null);
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useState(GetItem('user'));
     const [imageProd, setImageProd] = useState('')
     const [title, setTitle] = useState('');
     const [titleSuccessProduct, setTitleSuccessProduct] = useState('d-none');
@@ -29,7 +28,7 @@ const EditProduct = prop => {
     const [payment, setPayment] = useState('');
     const [onLoadAdd, setOnLoadAdd] = useState(false);
     const [hiddenBtn, setHiddenBtn] = useState('d-block');
-    
+
     const handleUpdateProduct = async () => {
         await fetch(`${process.env.API_PATH}/v1/auth`, {
             body: JSON.stringify({token: await cookies.user.token}), 
@@ -55,7 +54,7 @@ const EditProduct = prop => {
                 frmData.append('shipping', shipping);
                 frmData.append('CBU', CBU);
                 frmData.append('contact_business', contact);
-                frmData.append('business', business);
+                frmData.append('business', cookies?.user?.business);
                 frmData.append('location', location);
                 frmData.append('type', type);
                 frmData.append('subcategory', subCategory);
@@ -92,7 +91,6 @@ const EditProduct = prop => {
         setAmount('')
         setAmountSale('')
         setDiscount('')
-        setBusiness('')
         setContact('')
         setCBU('')
         setTitle('')
@@ -107,7 +105,6 @@ const EditProduct = prop => {
     handleInputAmount = e => setAmount(e.target.value),
     handleInputAmountSale = e => setAmountSale(e.target.value),
     handleInputDiscount = e => setDiscount(e.target.value),
-    handleInputBusiness = e => setBusiness(e.target.value),
     handleInputLocation = e => setLocation(e.target.value),
     handleInputType= e => setType(e.target.value),
     handleInputSubCategory = e => setSubCategory(e.target.value),
@@ -186,8 +183,6 @@ const EditProduct = prop => {
                     <input onChange={handleInputCBU} type="text" name="CBU" className="d-block" placeholder='CBU de ingresos'/>
                     <small className="p-2 m-0">Teléfono <span className='text-danger'>*</span></small>
                     <input onChange={handleInputContact} type="text" name="contact_business" className="d-block" placeholder='Teléfono'/>
-                    <small className='p-2 m-0'>Empresa <span className='text-danger'>*</span></small>
-                    <input onChange={handleInputBusiness} className='d-block' type="text" placeholder='Empresa' value={business}/>
                     <small className='p-2 m-0'>Localidad <span className='text-danger'>*</span></small>
                     <input onChange={handleInputLocation} className='d-block' type="text" placeholder='Localidad' value={location}/>
                     <input onChange={handleInputTitle} type="submit" value="Agregar" className='form-control d-block btn'/>

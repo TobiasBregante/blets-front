@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useRef } from "react";
-import { useState } from "react";
-import { useCookies } from 'react-cookie';
+import { useRef, useState, useEffect } from "react";
+import GetItem from "../localStorage/getItem";
+import SetItem from '../localStorage/setItem';
 
 const Login = () => {
     // get value inputs of form login
@@ -10,11 +9,12 @@ const Login = () => {
     const [pdw, setPdw] = useState('');
     const userWarning = useRef(null);
     // user cookie
-    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useState(GetItem('user'));
     // switch for view or not pdw when write
     const [viewPdw, setViewPdw] = useState('password');
     const [viewPdwClose, setViewPdwClose] = useState('d-none');
     const [viewPdwOpen, setViewPdwOpen] = useState('d-block');
+    
     // handler of view pdw or not
     const handlePdwView = () => {
         if(viewPdwClose === 'd-none'){
@@ -45,7 +45,8 @@ const Login = () => {
                 userWarning.current.classList.toggle('d-block');
             }, 2500)
         }else{
-            setCookie('user', datares, { maxAge: 86400 });
+            // setCookie('user', datares, { maxAge: 86400 });
+            SetItem('user', datares);
             statusUser = {
                 status: true
             }

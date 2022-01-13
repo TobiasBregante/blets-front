@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
 import CurrencyFormat from 'react-currency-format'
+import GetItem from '../localStorage/getItem'
 
 const SwitchPriceAuth = ({ discount = 0, amount = 0 }) => {
-    const [cookies, setCookie] = useCookies(['user'])
+    const [cookies, setCookie] = useState(GetItem('user'))
     const [amountEdit, setAmountEdit] = useState('')
     const [state, setState] = useState(true)
 

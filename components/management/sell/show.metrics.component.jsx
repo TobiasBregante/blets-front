@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SellsPending from './sells.pending.component';
 import CurrencyFormat from 'react-currency-format';
 import moment from 'moment';
 import axios from 'axios';
+import GetItem from  '../../localStorage/getItem'
 
 const TransactionsComp = prop => {
     const [transactionMetrics, setTransactionMetrics] = useState([]);
     const [valueDate, setValueDate] = useState(moment().format('YYYY-MM-DD'));
+    const [cookie, setCookie] = useState(GetItem('user'));
 
     const handlerFetchMetrics = async (date = moment().format('YYYY-MM-DD')) => {
         // fetch metrics
@@ -15,11 +16,12 @@ const TransactionsComp = prop => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'date_filter': date
+                'date_filter': date,
+                'business':  cookie?.user?.business,
+                'rol':  cookie?.user?.rol
             }
         });
-        const resFetchMetrics = await getFetchMetrics.data;
-        console.log(resFetchMetrics);
+        const resFetchMetrics = await getFetchMetrics?.data;
         setTransactionMetrics(resFetchMetrics);
     },
     handlerChangeFilterDate = e => {
@@ -33,6 +35,7 @@ const TransactionsComp = prop => {
     useEffect(() => {
         handlerFetchMetrics();
     }, [prop]);
+
     return(
         <>
         <article className="content-metrics-header-mybusiness col-12 col-sm-12 col-lg-12 col-xl-12">
@@ -51,7 +54,7 @@ const TransactionsComp = prop => {
                             d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
                         />
                     </svg> 
-                    <span className='text-primary d-block'>{transactionMetrics.success}</span>
+                    <span className='text-primary d-block'>{transactionMetrics?.success}</span>
                 </li>
                 <li title='Pago pendiente'>
                     <svg 
@@ -67,7 +70,7 @@ const TransactionsComp = prop => {
                             d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
                         />
                     </svg> 
-                    <span className='text-secondary d-block'>{transactionMetrics.pending}</span>
+                    <span className='text-secondary d-block'>{transactionMetrics?.pending}</span>
                 </li>
                 <li>
                     <label className="badge p-2">
@@ -78,7 +81,9 @@ const TransactionsComp = prop => {
                                 className='d-block form-control'
                                 onChange={handlerChangeFilterDate} 
                                 type="date" 
-                                min={moment(transactionMetrics.latest_sell[0].create_at_filter)} 
+                                min={moment(
+                                    transactionMetrics?.latest_sell[0]?.length >= 0 
+                                    && transactionMetrics.latest_sell[0]?.create_at_filter)} 
                                 max={moment().format('YYYY-MM-DD')}
                                 value={valueDate}
                             />
@@ -89,7 +94,7 @@ const TransactionsComp = prop => {
                     <span className='text-dark'>Cash total: </span> 
                     <span className='text-success badge bg-dark p-2 metrics-badge-amount'>
                         <CurrencyFormat 
-                            value={transactionMetrics ? transactionMetrics.amount_total : 0} 
+                            value={transactionMetrics?.amount_total_cancel || 0} 
                             displayType={'text'} 
                             thousandSeparator={true} 
                             prefix={'$'}
@@ -100,7 +105,7 @@ const TransactionsComp = prop => {
                     <span className='text-dark'>Cash aprobado: </span> 
                     <span className='text-success badge bg-dark p-2 metrics-badge-amount'>
                         <CurrencyFormat 
-                            value={transactionMetrics ? transactionMetrics.amount_total_success : 0} 
+                            value={transactionMetrics?.amount_total_cancel || 0} 
                             displayType={'text'} 
                             thousandSeparator={true} 
                             prefix={'$'}
@@ -111,7 +116,7 @@ const TransactionsComp = prop => {
                     <span className='text-dark'>Cash pendiente: </span> 
                     <span className='text-warning badge bg-dark p-2 metrics-badge-amount'>
                         <CurrencyFormat 
-                            value={transactionMetrics ? transactionMetrics.amount_total_pending : 0} 
+                            value={transactionMetrics?.amount_total_cancel || 0} 
                             displayType={'text'} 
                             thousandSeparator={true} 
                             prefix={'$'}
@@ -122,7 +127,7 @@ const TransactionsComp = prop => {
                     <span className='text-dark'>Cash rechazado: </span> 
                     <span className='text-danger badge bg-dark p-2 metrics-badge-amount'>
                         <CurrencyFormat 
-                            value={transactionMetrics ? transactionMetrics.amount_total_cancel : 0} 
+                            value={transactionMetrics?.amount_total_cancel || 0} 
                             displayType={'text'} 
                             thousandSeparator={true} 
                             prefix={'$'}

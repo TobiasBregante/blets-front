@@ -6,8 +6,6 @@ const Heads = () => (
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>MarketBlets Argentina</title>
         <meta property="og:type" content="article"/>
-        <link rel="icon" type="image/png" href="../img/icon.png"/>
-        <meta property="og:image" content="../img/icon.png"/>
         <link rel="stylesheet" 
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 

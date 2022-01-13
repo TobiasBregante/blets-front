@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useCookies } from 'react-cookie';
+import { useState, useEffect } from "react";
 import ColSell from './col.sells.pending.component';
 import OnLoadComponent from '../../onload.component';
 import axios from 'axios';
+import GetItem from '../../localStorage/getItem'
 
 const SellsPending = ({ dateFilter }) => {
     const [transactionFind, setTransactionFind] = useState([]);
-    const [cookies, setCookies] = useCookies(['user']);
+    const [cookies, setCookies] = useState(GetItem('user'));
     const [onLoadAdd, setOnLoadAdd] = useState(false);
     const Router = useRouter();
     
@@ -19,23 +18,31 @@ const SellsPending = ({ dateFilter }) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'date_filter': dateFilter
+                'date_filter': dateFilter,
+                'business': cookies?.user?.business
             }
         });
-        const resFetch = await getFetch.data;
+        const resFetch = await getFetch?.data;
         await resFetch && resFetch.status && dateFilter && setOnLoadAdd(false) 
         setTransactionFind(resFetch);
     }
     
+    const cred = ['seller', 'master'];
+    let accessDenied = false;
+    
     useEffect(() => {
-        if(cookies.user 
-            && cookies.user.rol !== 'seller'){
-            Router.push('/')
-        }else if(!cookies.user){
-            Router.push('/')
-        }
-        handlerFetch();
+        handlerFetch()
     }, [dateFilter])
+
+    useEffect(() => {
+        cred?.length > 0 && cred.forEach(credential => {
+            if(cookies?.user?.rol === credential){
+                accessDenied = true;
+            }
+        })
+        !accessDenied && Router.push('/')
+    }, [cookies?.user])
+    
     return(
         <>
         {

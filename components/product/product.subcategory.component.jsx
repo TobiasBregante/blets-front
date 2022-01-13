@@ -30,7 +30,7 @@ const ProductSubcategory = prop => {
     return(
         <>
         <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
+        <ol className="breadcrumb text-primary">
             <li className="breadcrumb-item">
                 <Link href="/" as='/'>
                     <a>Inicio</a>
@@ -41,7 +41,7 @@ const ProductSubcategory = prop => {
                     <a>indumentarias</a>
                 </Link>
             </li>
-            <li className="breadcrumb-item active text-light" aria-current="page">{subcategory}</li>
+            <li className="breadcrumb-item active text-primary" aria-current="page">{subcategory}</li>
         </ol>
         </nav>
         {

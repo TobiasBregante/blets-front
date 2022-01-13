@@ -1,0 +1,1 @@
+{"ast":null,"code":"var RemoveItem = function RemoveItem(itemName) {\n  localStorage.removeItem(itemName);\n  return true;\n};\n\nexport default RemoveItem;","map":null,"metadata":{},"sourceType":"module"}

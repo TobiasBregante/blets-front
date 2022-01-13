@@ -1,9 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import { useCookies } from 'react-cookie';
+import { useEffect, useRef, useState } from "react";
 
 const Register = () => {
     // get value inputs of form login
@@ -16,8 +13,6 @@ const Register = () => {
     const userWarningNull = useRef(null);
     const userWarning = useRef(null);
     const userSuccess = useRef(null);
-    // user cookie
-    const [cookies, setCookie, removeCookie] = useCookies(['user']);
     // switch for view or not pdw when write
     const [viewPdw, setViewPdw] = useState('password');
     const [viewPdwClose, setViewPdwClose] = useState('d-none');
@@ -26,9 +21,9 @@ const Register = () => {
     // array list of South América provinces, Argentina
     useEffect(() => {
         const geoDataFetch = async () => {
-            const geo = await fetch('https://apis.datos.gob.ar/georef/api/provincias');
-            const geoJSON = await geo.json();
-            setGeoData(geoJSON.provincias)
+            //const geo = await fetch('https://apis.datos.gob.ar/georef/api/provincias');
+            //const geoJSON = await geo.json();
+            //setGeoData(geoJSON.provincias)
         }
         geoDataFetch()
     }, [])
@@ -53,7 +48,7 @@ const Register = () => {
         const dataVerifyUser = [
             username,
             fullname,
-            location, 
+            (location || 'Agregar localidad'), 
             userPdw, 
             userEmail
         ]
@@ -64,7 +59,7 @@ const Register = () => {
                     since_create: valueDate.toLocaleDateString("es-AR", options),
                     username: username,
                     fullname: fullname,
-                    location: location, 
+                    location: location || 'Agregar localidad', 
                     pdw: userPdw, 
                     email: userEmail
                 }), 
@@ -127,13 +122,17 @@ const Register = () => {
                 <input onChange={handleChangeFullname} type="text" name="fullname" placeholder='Nombre completo'/>
                 <input onChange={handleChangeUsername} type='text' name='user' placeholder='Nombre de usuario'/>
                 <input onChange={handleChangeEmail} type='email' name='email' placeholder='Correo electrónico'/>
-                <select onChange={handleChangeLocation} name="location">
-                    {
-                        geoData ? 
-                        geoData.map(location => <option key={location.id}>{location.nombre}</option>) 
-                        : <option>No hay provincias</option>
-                    }
-                </select>
+                {
+                    location && (
+                        <select onChange={handleChangeLocation} name="location">
+                            {
+                                geoData ? 
+                                geoData.map(location => <option key={location.id}>{location.nombre}</option>) 
+                                : <option >No hay provincias</option>
+                            }
+                        </select>
+                    )
+                }
                 <article className="col-12 p-0">
                     <input onChange={handleChangePdw} type={viewPdw} name='pdw' placeholder='Contraseña'/>
                     <button onClick={handlePdwView} type='button' className='btn-switch-pdw'>

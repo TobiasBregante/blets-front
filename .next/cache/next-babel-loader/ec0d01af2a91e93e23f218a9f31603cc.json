@@ -1,0 +1,1 @@
+{"ast":null,"code":"var GetItem = function GetItem(itemName) {\n  return true && localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};\n};\n\nexport default GetItem;","map":null,"metadata":{},"sourceType":"module"}

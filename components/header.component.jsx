@@ -1,66 +1,78 @@
 import Link from 'next/link';
 import NavbarVertical from  './navbar.vertical.component';
-import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import InputTokenInfluencer from './get.token.influencer';
+// import InputTokenInfluencer from './get.token.influencer';
 import { useRouter } from 'next/router';
 import CategoryList from './management/category.list.component';
+import RemoveItem from './localStorage/removeItem';
+import GetItem from "./localStorage/getItem";
 
 const Header = () => {
-    const Router = useRouter();
-    const [cookies, setCookie, removeCookie] = useCookies(['user']);
-    const [inputSearch, setInputSearch] = useState('');
-    const [viewBtnLoginRegister, setViewBtnLoginRegister] = useState('');
-    const [userLogged, setUserLogged] = useState('d-none');
-    const [userLoggedSellers, setUserLoggedSellers] = useState('d-none');
-    const [userLoggedInfluencer, setUserLoggedInfluencer] = useState('d-none');
-    const [userLoggedBusiness, setUserLoggedBusiness] = useState('d-none');
-    const [stateNav, setStateNav] = useState('navbar-vertical-close');
-    const [navbarContent, setNavbarContent] = useState('navbar-content-close');
-    const [offOn, setOffOn] = useState('d-none')
+    const 
+    Router = useRouter(),
+    [cookies, setCookie] = useState(GetItem('user')),
+    [inputSearch, setInputSearch] = useState(''),
+    [viewBtnLoginRegister, setViewBtnLoginRegister] = useState(''),
+    [userLogged, setUserLogged] = useState('d-none'),
+    [userLoggedSellers, setUserLoggedSellers] = useState('d-none'),
+    [userLoggedInfluencer, setUserLoggedInfluencer] = useState('d-none'),
+    [userLoggedBusiness, setUserLoggedBusiness] = useState('d-none'),
+    [stateNav, setStateNav] = useState('navbar-vertical-close'),
+    [navbarContent, setNavbarContent] = useState('navbar-content-close'),
+    [offOn, setOffOn] = useState('d-none'),
+    [userLoggedNormal, setUserLoggedNormal] = useState('d-none');
 
-    const Logout = () => {
-        removeCookie('user');
-        document.cookie.split(";").forEach((c) => {
-            document.cookie = c
-            .replace(/^ +/, "")
-            .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-        });
+    const Logout = async () => {
+        await RemoveItem('user');
+        setCookie({})
+        // removeCookie('user');
+        // removeCookie();
+        // await document.cookie.split(";").forEach((c) => {
+        //     document.cookie = c
+        //     .replace(/^ +/, "")
+        //     .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        // });
+
+        return true
     }
     const handlerLogout = async () => {
-        Logout()
-        if(!cookies.user){
-            window.location = '/'
-        }
+        await Logout()
+        .then(success => {
+            if(!cookies.user && success){
+                Router.push('/');
+            }
+        })
     }
     useEffect(() => {
-        if(cookies.user && cookies.user.rol === 'master'){
+        cookies?.user?.rol === 'user' && setUserLoggedNormal('') 
+        if(cookies?.user?.rol === 'master'){
             setUserLogged('')
-        }else{
-            setUserLogged('d-none')
-            if(cookies.user && cookies.user.rol === 'influencer'){
-                setUserLoggedInfluencer('');
-            }else{
-                setUserLoggedInfluencer('d-none');
-                if(cookies.user && cookies.user.rol === 'seller'){
-                    setUserLoggedSellers('');
-                }else{
-                    setUserLoggedSellers('d-none');
-                    cookies.user 
-                    && CategoryList.forEach(element => element.category === cookies.user.rol && setUserLoggedBusiness(''))
-                }
-            }
+            setUserLoggedNormal('')
+            setUserLoggedSellers('');
+            setUserLoggedBusiness('');
         }
-        if(cookies.user){
+        if(cookies?.user?.rol === 'seller'){
+            setUserLoggedNormal('');
+            setUserLoggedSellers('');
+            setUserLoggedBusiness('');
+        }if(cookies?.user?.rol === 'influencer'){
+            setUserLoggedInfluencer('');
+        }if(cookies?.user){
             setViewBtnLoginRegister('d-none')
-            cookies.user.discount_token
+            cookies.user?.discount_token
             && setOffOn('')
-        }else{
-            setViewBtnLoginRegister('')
-            setOffOn('d-none')
+        }if(!cookies?.user){
+            setUserLogged('d-none');
+            setUserLoggedBusiness('d-none');
+            setUserLoggedInfluencer('d-none');
+            setUserLoggedNormal('d-none');
+            setViewBtnLoginRegister('');
+            setUserLoggedSellers('d-none');
+            setOffOn('d-none');
         }
-    }, null)
+        console.log(cookies)
+    }, cookies?.user)
     const handlerInputSearch = e => {
         setInputSearch(e.target.value);
     }
@@ -95,13 +107,8 @@ const Header = () => {
                 <article className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                        <Link href="/" as="/">
-                            <a className="nav-link">Inicio <span className="sr-only">(current)</span></a>
-                        </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link href="/nosotros" as="/nosotros">
-                                <a className="nav-link">Sobre nosotros</a>
+                            <Link href="/" as="/">
+                                <a className="nav-link">Inicio <span className="sr-only">(current)</span></a>
                             </Link>
                         </li>
                         <li className={`nav-item ${userLogged}`}>
@@ -119,46 +126,56 @@ const Header = () => {
                                 <a className="nav-link">Mi perfil</a>
                             </Link>
                         </li>
-                        <li className={`nav-item ${userLoggedSellers}`}>
-                            <Link href="/transacciones" as="/transacciones">
-                                <a className="nav-link">Transacciones</a>
+                        <li className={`nav-item ${userLoggedNormal}`}>
+                            <Link href="/usuario/perfil" as="/usuario/perfil">
+                                <a className="nav-link">Mi perfil</a>
                             </Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Soporte
-                            </a>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <Link href="/ayuda" as="/ayuda">
-                                    <a className="dropdown-item">Ayúda</a>
-                                </Link>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <div className="dropdown-divider" />
-                                <a className="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li className="nav-item content-code-ref-input">
-                            <InputTokenInfluencer/>
+                        <li className={`nav-item ${userLoggedSellers}`}>
+                            <Link href="/pedidos" as="/pedidos">
+                                <a className="nav-link">Mis pedidos</a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <Link href='/#' as='/#'>
+                            <Link href='/iniciar-sesion' as='/iniciar-sesion'>
+                                <a className={`content-btn-register-now nav-link ${(viewBtnLoginRegister) ? 'd-none' : ''}`}>
+                                    Ingresar
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link href='/registrarme' as='/registrarme'>
+                                <a className={`content-btn-register-now nav-link ${(viewBtnLoginRegister) ? 'd-none' : ''}`}>
+                                    Registrarme
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link href='/' as='/'>
                                 <a className={`content-btn-register-now nav-link ${(!viewBtnLoginRegister) ? 'd-none' : ''}`} onClick={handlerLogout}>
                                     Cerrar sesión
                                 </a>
                             </Link>
                         </li>
+                        {/* <li className="nav-item content-code-ref-input">
+                            <InputTokenInfluencer/>
+                        </li> */}
                         <li className={`nav-item ${offOn}`}>
                             <span className="badge bg-danger text-light p-1">
                                 Descuentos activos!
                             </span>
                         </li>
                     </ul>
-                    <article className="form-inline my-2 my-lg-0">
-                        <form onSubmit={handlerSendSearch}>
-                            <input onChange={handlerInputSearch} className="form-control mr-sm-2" type="search" placeholder="Buscalo acá" aria-label="Search" value={inputSearch}/>
-                            <button className="btn my-2 my-sm-0 btn-search" type="submit">Buscar</button>
-                        </form>
-                    </article>
+                    {
+                        Router.pathname !== '/' && (
+                            <article className="form-inline my-2 pl-0 my-lg-0 col-8 col-sm-8 col-lg-3 col-xl-3">
+                                <form onSubmit={handlerSendSearch} className='bg-light col-12 frm-search-engine-header'>
+                                    <input onChange={handlerInputSearch} className="form-control mr-sm-2" type="search" placeholder="Buscalo acá" aria-label="Search" value={inputSearch}/>
+                                    <button className="btn my-2 my-sm-0 btn-primary" type="submit">Ir</button>
+                                </form>
+                            </article>
+                        )
+                    }
                 </article>
             </nav>
         </header>

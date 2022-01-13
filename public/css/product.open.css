@@ -1,5 +1,4 @@
 .btn-buy-now{
-    background-color: rgb(255, 0, 123);
     font-weight: 600;
 }
 .content-img-prod-open{
@@ -24,6 +23,9 @@
     word-wrap: break-word;
     font-size: 15px !important;
 }
+.desc-card-view-transaction p{
+    font-size: 15px !important;
+}
 .proof-preview-prod{
     width: 50%;
     height: auto;
@@ -31,4 +33,9 @@
     display: inline-block;
     max-height: 100px;
     max-width: 100px;
+}
+.breadcrumb-product-open{
+    background-color: transparent;
+    box-shadow: none !important;
+    font-weight: 600;
 }

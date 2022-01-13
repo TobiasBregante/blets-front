@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useCookies } from "react-cookie";
+import { useState, useEffect } from "react";
+import GetItem from '../../localStorage/getItem'
 
 const ShowMetrics = prop => {
     const [influencer, setInfluencer] = useState({});
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useState(GetItem('user'));
+
     useEffect(() => {
         const handlerFetchInfluencer = async () => {
             const userFetch = await fetch(`${process.env.API_PATH}/v1/profile/influencer/${cookies.user.id}`, {
@@ -31,6 +31,7 @@ const ShowMetrics = prop => {
             .then(success => Dashboard(success.public_token));
         }
     }, [prop])
+    
     return(
         <>
         <article className="content-metrics-header-mybusiness col-12 col-sm-12 col-lg-12 col-xl-12">

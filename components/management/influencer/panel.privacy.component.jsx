@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useCookies } from 'react-cookie';
+import { useState, useEffect } from "react";
+import GetItem from '../../localStorage/getItem'
 
 const PanelPrivacy = props => {
-    const [cookies, setCookie] = useCookies(['user']);
-    const [influencer, setInfluencer] = useState({});
+    const [cookies, setCookie] = useState({});
+    const [influencer, setInfluencer] = useState(GetItem('user'));
+
     useEffect(() => {
         const handlerFetchInfluencer = async () => {
-            const userFetch = await fetch(`${process.env.API_PATH}/v1/profile/influencer/${cookies.user.id}`, {
+            const userFetch = await fetch(`${process.env.API_PATH}/v1/profile/influencer/${cookies?.user?.id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
@@ -21,6 +21,7 @@ const PanelPrivacy = props => {
         }
             
     }, [props]);
+
     return(
         <>
         <article className='panel-privacy-influencer col-12 col-sm-12 col-lg-12 col-xl-12 p-0 mt-4'>

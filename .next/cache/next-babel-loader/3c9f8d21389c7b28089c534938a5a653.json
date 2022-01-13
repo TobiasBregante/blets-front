@@ -1,0 +1,1 @@
+{"ast":null,"code":"const SetItem = (itemName, itemValue) => {\n  const newValue = {};\n  newValue[itemName] = itemValue;\n  localStorage.setItem(itemName, JSON.stringify(newValue));\n  return true;\n};\n\nexport default SetItem;","map":null,"metadata":{},"sourceType":"module"}

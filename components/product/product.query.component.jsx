@@ -30,8 +30,8 @@ const ProductAll = prop => {
         <>
         <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
-                <li className="breadcrumb-item"><Link href="/" as='/'><a>Inicio</a></Link></li>
-                <li className="breadcrumb-item active text-light" aria-current="page">{keyword}</li>
+                <li className="breadcrumb-item text-primary"><Link href="/" as='/'><a>Inicio</a></Link></li>
+                <li className="breadcrumb-item active text-primary" aria-current="page">{keyword}</li>
             </ol>
         </nav>
         {

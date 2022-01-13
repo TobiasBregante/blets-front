@@ -8,7 +8,7 @@ const SendTransaction = async (objectTransaction, cookies) => {
                 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data',
                 'Access-Control-Allow-Origin': '*',
-                'token': cookies.user.token
+                'token': cookies?.user?.token
             }
         }
     );

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import Router from 'next/router';
 import ShowMetrics from './management/influencer/show.metrics.component';
 import PanelPrivacy from './management/influencer/panel.privacy.component'
+import GetItem from "./localStorage/getItem";
 
 const MyProfileComp = () => {
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useState(GetItem('user'));
     const [valueDate, onChangeDate] = useState(new Date());
     const [influencerLogged, setInfluencerLogged] = useState('');
+
     useEffect(() => {
         if(cookies.user 
             && cookies.user.rol !== 'influencer'){
@@ -17,7 +18,9 @@ const MyProfileComp = () => {
         }
         cookies.user ? setInfluencerLogged(cookies.user.user) : false;
     })
+    
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    
     return(
         <>
         <article className="col-12 col-sm-12 col-lg-12 col-xl-12 bg-dark text-light mb-2 p-4">
